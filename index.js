@@ -5,6 +5,9 @@ import errorHandler from './src/middlewares/errorHandler'
 
 import path from 'path'
 
+import swaggerUi  from 'swagger-ui-express'
+import swaggerDocument from './swagger.json'
+
 const app = express()
 
 import routes from './src/routes'
@@ -20,11 +23,18 @@ db.once('open', () => {
 })
 //#endregion
 
+//#region Swagger Setup
+var options = {
+    //customCss: '.swagger-ui .topbar {background-color: #3f6cff;}.swagger-ui .opblock.opblock-post .opblock-summary-method {background: #0255c1;}',
+    customSiteTitle: "Portfolio API | Welcome"
+};
+
+app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument,options))
+//#endregion
+
 //📌Note: By default JSON in Express JS --==> ❎disable 
 app.use(express.json()) //✅ Enable
 
-//Routes
-app.use(routes)
 
 //📌Note: For view image globally
 app.use('/uploads',express.static('uploads'))
@@ -36,6 +46,10 @@ app.use(express.urlencoded(
         extended:false   
     }
 ))
+
+//Routes
+app.use(routes)
+
 //Error Handler
 app.use(errorHandler)
 

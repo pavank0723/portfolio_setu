@@ -10,8 +10,8 @@ router.post('/auth/login',loginController.login)
 
 router.get('/auth/user',auth,userController.user)
 
-router.post('/auth/refresh',auth,refreshController.refresh)
+router.post('/auth/refresh',refreshController.refresh)
 
-router.post('/auth/logout',auth,loginController.logout)
+router.post('/auth/logout',loginController.logout)
 
 export default router

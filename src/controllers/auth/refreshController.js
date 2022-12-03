@@ -4,7 +4,6 @@ import { RefreshToken, User } from "../../models"
 import CustomErrorHandler from "../../services/CustomErrorHandler"
 import { JwtService } from "../../services/JwtService"
 import { refreshSchema } from "../../validations/authValidator"
-// import refreshSchema from "../../validations/refreshTokenValidator"
 
 const refreshController = {
     async refresh(req, res, next) {

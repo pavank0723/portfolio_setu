@@ -1,19 +1,20 @@
 import { User } from "../models"
 import CustomErrorHandler from "../services/CustomErrorHandler"
 
+
 const admin = async (req, res, next) => {
     try {
         //Get from the collection
-        const user = User.findOne(
+        const user = await User.findOne(
             {
                 _id: req.user._id
             }
         )
 
         //Check
-        if(user.role === 'admin'){
+        if (user.role === 'admin') {
             next()
-        }else{
+        } else {
             return next(CustomErrorHandler.unAuthorized())
         }
 

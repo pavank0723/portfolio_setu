@@ -28,7 +28,7 @@ const registerController = {
         const { error } = regiterValidate
 
         if (error) {
-            return next(CustomErrorHandler.serverError('Koi error h'))
+            return next(error)
         }
         //#endregion
 
@@ -44,7 +44,7 @@ const registerController = {
                 return next(CustomErrorHandler.alreadyExist('This user already exist'))
             }
         } catch (error) {
-            return next(CustomErrorHandler.serverError('koi error2 h',error.message))
+            return next(error)
         }
 
         //#endregion
