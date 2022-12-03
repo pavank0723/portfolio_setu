@@ -4,20 +4,15 @@ import { RefreshToken, User } from "../../models"
 
 import CustomErrorHandler from "../../services/CustomErrorHandler"
 import { JwtService } from "../../services/JwtService"
-// import { refreshSchema } from "../../validations/authValidator"
+import { refreshSchema } from "../../validations/authValidator"
 
 const refreshController = {
     async refresh(req, res, next) {
         //1️⃣ VALIDATION
-        // const refreshValidator = refreshSchema.validate(req.body)
-        const refreshSchema = Joi.object(
-            {
-                refresh_token: Joi.string().required()
-            }
-        )
-
+        const refreshValidator = refreshSchema.validate(req.body)
+        
         //2️⃣ AUTHORIZE -==> Joi Validate if error
-        const { error } = refreshSchema.validate(req.body)
+        const { error } = refreshValidator
         if (error) {
             return next(error)
         }
