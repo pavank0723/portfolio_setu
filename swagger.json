@@ -120,7 +120,7 @@
                 "description": "Refresh token and access token generated",
                 "parameters": [
                     {
-                        "name": "obj",
+                        "name": "refresh_token",
                         "in": "body",
                         "required": true,
                         "schema": {
@@ -200,7 +200,7 @@
             "properties": {
                 "refresh_token": {
                     "type": "string",
-                    "example": "john@mail.com"
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzhiMWJmMjQ2NGQ5YTQxNDY3MjAyMzAiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NzAwNzI0ODEsImV4bCI3OIcwMTYzMDA4MX0.2u0cXhR_Ozmephlc4htyuYjdUdgA4rRfHNyncwOvdKg"
                 }
             },
             "required": [

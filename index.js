@@ -35,7 +35,6 @@ app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument,options))
 //📌Note: By default JSON in Express JS --==> ❎disable 
 app.use(express.json()) //✅ Enable
 
-
 //📌Note: For view image globally
 app.use('/uploads',express.static('uploads'))
 

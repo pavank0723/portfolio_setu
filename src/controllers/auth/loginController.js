@@ -4,9 +4,7 @@ import CustomErrorHandler from "../../services/CustomErrorHandler"
 import bcrypt from 'bcrypt'
 import { JwtService } from "../../services/JwtService"
 import { REFRESH_SECRET } from "../../config"
-import Joi from "joi"
-import { PASSWORD_RE } from "../../utils/const"
-import { loginSchema } from "../../validations/authValidator"
+import { loginSchema,refreshSchema } from "../../validations/authValidator"
 
 const loginController = {
     async login(req, res, next) {
@@ -89,6 +87,7 @@ const loginController = {
         } catch (error) {
             return next(new Error('Something went wrong in DB'))
         }
+        res.json({status:1})
     }
 }
 

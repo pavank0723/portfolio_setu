@@ -1,22 +1,29 @@
+import Joi from "joi"
 import { REFRESH_SECRET } from "../../config"
 import { RefreshToken, User } from "../../models"
 
 import CustomErrorHandler from "../../services/CustomErrorHandler"
 import { JwtService } from "../../services/JwtService"
-import { refreshSchema } from "../../validations/authValidator"
+// import { refreshSchema } from "../../validations/authValidator"
 
 const refreshController = {
     async refresh(req, res, next) {
         //1️⃣ VALIDATION
-        const refreshValidator = refreshSchema.validate(req.body)
-        
+        // const refreshValidator = refreshSchema.validate(req.body)
+        const refreshSchema = Joi.object(
+            {
+                refresh_token: Joi.string().required()
+            }
+        )
+
         //2️⃣ AUTHORIZE -==> Joi Validate if error
-        const { error } = refreshValidator
+        const { error } = refreshSchema.validate(req.body)
         if (error) {
             return next(error)
         }
 
         //3️⃣ DATABASE
+        //Check refresh token or not
         let refreshToken
         try {
             refreshToken = await RefreshToken.findOne(
@@ -28,6 +35,7 @@ const refreshController = {
                 return next(CustomErrorHandler.unAuthorized('Invalid refresh token'))
             }
 
+            //Check User ID with refresh token
             let userId
             try {
                 const { _id } = await JwtService.verify(refreshToken.token, REFRESH_SECRET)
@@ -35,7 +43,6 @@ const refreshController = {
             } catch (error) {
                 return next(CustomErrorHandler.unAuthorized('Invalid refresh token'))
             }
-
             const user = User.findOne(
                 {
                     _id: userId
@@ -46,21 +53,35 @@ const refreshController = {
             }
 
             //#region 4️⃣ Token
-            //ACCESS TOKEN
-            access_token = JwtService.sign(
+            //4️⃣.1️⃣ACCESS TOKEN
+            const access_token = JwtService.sign(
                 {
-                    _id: result._id,
-                    role: result.role
+                    _id: user._id,
+                    role: user.role
                 }
             )
-            //REFRESH TOKEN
-            refresh_token = JwtService.sign(
+            //4️⃣.2️⃣REFRESH TOKEN
+            const refresh_token = JwtService.sign(
                 {
-                    _id: result._id,
-                    role: result.role
+                    _id: user._id,
+                    role: user.role
                 },
                 '1y',
                 REFRESH_SECRET
+            )
+
+            //4️⃣.3️⃣DB whitelist
+            await RefreshToken.create(
+                {
+                    token: refresh_token
+                }
+            )
+            //Return response
+            res.json(
+                {
+                    access_token,
+                    refresh_token
+                }
             )
             //#endregion
 
