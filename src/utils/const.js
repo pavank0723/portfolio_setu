@@ -1,0 +1,1 @@
+export const PASSWORD_RE = '^[a-zA-Z0-9]{3,30}$'
