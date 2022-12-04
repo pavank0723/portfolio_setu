@@ -11,6 +11,10 @@
         {
             "name": "Auth",
             "description": "All the autherization method"
+        },
+        {
+            "name": "Utils",
+            "description": "All the extra method"
         }
     ],
     "schemes": [
@@ -149,6 +153,29 @@
                 ],
                 "responses": {}
             }
+        },
+        "/category/store": {
+            "post": {
+                "tags": [
+                    "Utils"
+                ],
+                "description": "Add category",
+                "parameters": [
+                    {
+                        "name": "obj",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CategoryModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                }
+            }
         }
     },  
     "definitions": {
@@ -205,6 +232,26 @@
             },
             "required": [
                 "refresh_token"
+            ]
+        },
+        "CategoryModel": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Category 0"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "This is Category 0 description"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "example": true
+                }
+            },
+            "required": [
+                "name"
             ]
         }
     }
