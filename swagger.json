@@ -154,7 +154,7 @@
                 "responses": {}
             }
         },
-        "/category/store": {
+        "/store/category": {
             "post": {
                 "tags": [
                     "Utils"
@@ -174,10 +174,105 @@
                     "422": {
                         "description": "Unprocessable Entity"
                     }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/edit/category/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of category that we want to find",
+                    "type": "string"
                 }
+            ],
+            "put": {
+                "tags": [
+                    "Utils"
+                ],
+                "description": "Update details of category",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "isActive",
+                        "in": "formData",
+                        "required": false,
+                        "type":"boolean"
+                    }
+                ],
+                "responses": {},
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/view/categories" : {
+            "get":{
+                "tags":[
+                    "Utils"
+                ],
+                "description":"View all category",
+                "responses":{}
+            }
+
+        },
+        "/destroy/category/{id}":{
+            "parameters":[
+                {
+                    "name":"id",
+                    "in":"path",
+                    "required":true,
+                    "type" : "string"
+                }
+            ],
+            "delete":{
+                "tags":[
+                    "Utils"
+                ],
+                "description":"Delete the particular category by ID",
+                "responses":{},
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/view/category/{id}":{
+            "parameters":[
+                {
+                    "name":"id",
+                    "in":"path",
+                    "required":true,
+                    "description":"ID of category that we wantn to find"
+                }
+            ],
+            "get":{
+                "tags":[
+                    "Utils"
+                ],
+                "description":"View the category detail by ID",
+                "responses":{}
             }
         }
-    },  
+    },
     "definitions": {
         "LoginModel": {
             "type": "object",

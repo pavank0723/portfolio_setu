@@ -23,14 +23,13 @@ const categorySchema = new Schema(
     {timestamps:true}
 )
 
-// categorySchema.pre("save", function(next){
-//     var docs = this;
-//     mongoose.model('Category', categorySchema,'categories').countDocuments(function(error, counter){
-//         if(error) return next(error);
-//         docs.cat_id = counter+1;
-//         next();
-//     });   
-// });
-
+categorySchema.pre("save", function(next){
+    var docs = this;    
+    mongoose.model('Category', categorySchema,'categories').countDocuments(function(error, counter){
+        if(error) return next(error);
+        docs.cat_id = counter+1;
+        next();
+    });   
+});
 
 export default mongoose.model('Category',categorySchema,'categories')
