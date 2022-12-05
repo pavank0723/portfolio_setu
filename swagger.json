@@ -13,8 +13,12 @@
             "description": "All the autherization method"
         },
         {
-            "name": "Utils",
-            "description": "All the extra method"
+            "name": "Portfolio",
+            "description": "All working portfolio methods"
+        },
+        {
+            "name": "Certificates",
+            "description": "All certificate methods"
         }
     ],
     "schemes": [
@@ -154,12 +158,12 @@
                 "responses": {}
             }
         },
-        "/store/category": {
+        "/store/portfolio_category": {
             "post": {
                 "tags": [
-                    "Utils"
+                    "Portfolio"
                 ],
-                "description": "Add category",
+                "description": "Add portfolio category",
                 "parameters": [
                     {
                         "name": "obj",
@@ -182,21 +186,21 @@
                 ]
             }
         },
-        "/edit/category/{id}": {
+        "/edit/portfolio_category/{id}": {
             "parameters": [
                 {
                     "name": "id",
                     "in": "path",
                     "required": true,
-                    "description": "ID of category that we want to find",
+                    "description": "ID of portfolio category that we want to find",
                     "type": "string"
                 }
             ],
             "put": {
                 "tags": [
-                    "Utils"
+                    "Portfolio"
                 ],
-                "description": "Update details of category",
+                "description": "Update details of portfolio category",
                 "parameters": [
                     {
                         "name": "name",
@@ -212,7 +216,7 @@
                         "name": "isActive",
                         "in": "formData",
                         "required": false,
-                        "type":"boolean"
+                        "type": "boolean"
                     }
                 ],
                 "responses": {},
@@ -223,31 +227,30 @@
                 ]
             }
         },
-        "/view/categories" : {
-            "get":{
-                "tags":[
-                    "Utils"
+        "/view/portfolio_categories": {
+            "get": {
+                "tags": [
+                    "Portfolio"
                 ],
-                "description":"View all category",
-                "responses":{}
+                "description": "View all portfolio category",
+                "responses": {}
             }
-
         },
-        "/destroy/category/{id}":{
-            "parameters":[
+        "/destroy/portfolio_category/{id}": {
+            "parameters": [
                 {
-                    "name":"id",
-                    "in":"path",
-                    "required":true,
-                    "type" : "string"
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
                 }
             ],
-            "delete":{
-                "tags":[
-                    "Utils"
+            "delete": {
+                "tags": [
+                    "Portfolio"
                 ],
-                "description":"Delete the particular category by ID",
-                "responses":{},
+                "description": "Delete the particular portfolio category by ID",
+                "responses": {},
                 "security": [
                     {
                         "Authorization": []
@@ -255,21 +258,138 @@
                 ]
             }
         },
-        "/view/category/{id}":{
-            "parameters":[
+        "/view/portfolio_category/{id}": {
+            "parameters": [
                 {
-                    "name":"id",
-                    "in":"path",
-                    "required":true,
-                    "description":"ID of category that we wantn to find"
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of portfolio_category that we wantn to find"
                 }
             ],
-            "get":{
-                "tags":[
-                    "Utils"
+            "get": {
+                "tags": [
+                    "Portfolio"
                 ],
-                "description":"View the category detail by ID",
-                "responses":{}
+                "description": "View the portfolio_category detail by ID",
+                "responses": {}
+            }
+        },
+        "/store/certificate_category": {
+            "post": {
+                "tags": [
+                    "Certificates"
+                ],
+                "description": "Add portfolio category",
+                "parameters": [
+                    {
+                        "name": "obj",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CertificateCategModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/edit/certificate_category/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of portfolio category that we want to find",
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "Certificates"
+                ],
+                "description": "Update details of portfolio category",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "isActive",
+                        "in": "formData",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {},
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/view/certificate_categories": {
+            "get": {
+                "tags": [
+                    "Certificates"
+                ],
+                "description": "View all certificate category",
+                "responses": {}
+            }
+        },
+        "/destroy/certificate_category/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Certificates"
+                ],
+                "description": "Delete the particular certificate category by ID",
+                "responses": {},
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/view/certificate_category/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of certificate category that we wantn to find"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Certificates"
+                ],
+                "description": "View the certificate category detail by ID",
+                "responses": {}
             }
         }
     },
@@ -334,11 +454,31 @@
             "properties": {
                 "name": {
                     "type": "string",
-                    "example": "Category 0"
+                    "example": "portfolio_category 0"
                 },
                 "description": {
                     "type": "string",
-                    "example": "This is Category 0 description"
+                    "example": "This is portfolio_category 0 description"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "example": true
+                }
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "CertificateCategModel": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "certificate_category 0"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "This is certificate_category 0 description"
                 },
                 "isActive": {
                     "type": "boolean",
