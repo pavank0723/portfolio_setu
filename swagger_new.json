@@ -1,5 +1,5 @@
 {
-    "swagger": "2.0",
+    "openapi": "3.0.1",
     "info": {
         "version": "1.0.0",
         "title": "Portfolio Setu",
@@ -13,6 +13,20 @@
     },
     "host": "localhost:5100",
     "basePath": "/",
+    "servers":[
+        {
+            "url":"http://localhost:5100/",
+            "description":"Local Server"
+        },
+        {
+            "url":"http://localhost:5100/",
+            "description":"Testing Server"
+        },
+        {
+            "url":"https://pavan-dev-portfolio.netlify.app/",
+            "description":"Production Server"
+        }
+    ],
     "tags": [
         {
             "name": "Auth",
@@ -32,9 +46,9 @@
         "https"
     ],
     "securityDefinitions": {
-        "Authorization": {
+        "ApiKeyAuth": {
             "type": "apiKey",
-            "name": "Authorization",
+            "name": "ApiKeyAuth",
             "description": "Value: Bearer ",
             "in": "header",
             "scheme": "bearer"
@@ -92,11 +106,13 @@
                         "description": "Unprocessable Entity"
                     }
                 },
-                "security": [
-                    {
-                        "Authorization": []
+                "securitySchemes": {
+                    "ApiKeyAuth":{
+                        "type":"apiKey",
+                        "in":"header",
+                        "name":"ApiKeyAuth"
                     }
-                ]
+                }
             }
         },
         "/auth/user": {
@@ -121,7 +137,7 @@
                 },
                 "security": [
                     {
-                        "Authorization": []
+                        "ApiKeyAuth": []
                     }
                 ]
             }
@@ -187,7 +203,7 @@
                 },
                 "security": [
                     {
-                        "Authorization": []
+                        "ApiKeyAuth": []
                     }
                 ]
             }
@@ -228,7 +244,7 @@
                 "responses": {},
                 "security": [
                     {
-                        "Authorization": []
+                        "ApiKeyAuth": []
                     }
                 ]
             }
@@ -259,7 +275,7 @@
                 "responses": {},
                 "security": [
                     {
-                        "Authorization": []
+                        "ApiKeyAuth": []
                     }
                 ]
             }
@@ -304,7 +320,7 @@
                 },
                 "security": [
                     {
-                        "Authorization": []
+                        "ApiKeyAuth": []
                     }
                 ]
             }
@@ -345,7 +361,7 @@
                 "responses": {},
                 "security": [
                     {
-                        "Authorization": []
+                        "ApiKeyAuth": []
                     }
                 ]
             }
@@ -376,7 +392,7 @@
                 "responses": {},
                 "security": [
                     {
-                        "Authorization": []
+                        "ApiKeyAuth": []
                     }
                 ]
             }
