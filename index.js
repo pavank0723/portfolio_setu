@@ -8,6 +8,10 @@ import path from 'path'
 import swaggerUi  from 'swagger-ui-express'
 import swaggerDocument from './swagger.json'
 
+import multer from 'multer'
+
+const upload = multer()
+
 const app = express()
 
 import routes from './src/routes'
@@ -40,11 +44,11 @@ app.use('/uploads',express.static('uploads'))
 
 //Get root folder
 global.appRoot = path.resolve(__dirname)
-app.use(express.urlencoded(
-    {
-        extended:false   
-    }
-))
+// For parsing application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true })); 
+
+// For parsing multipart/form-data
+app.use(upload.array()); 
 
 //Routes
 app.use(routes)

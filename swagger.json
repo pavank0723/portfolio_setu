@@ -373,6 +373,7 @@
                     "Portfolio"
                 ],
                 "summary": "Update details of portfolio category",
+                "consumes": "multipart/form-data",
                 "parameters": [
                     {
                         "name": "name",

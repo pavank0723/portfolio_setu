@@ -25,8 +25,6 @@ const categoryController = {
     async edit(req, res, next) {
         const { name, description, isActive } = req.body
         let document
-        var stringified = JSON.stringify(document);
-        var parsedObj = JSON.parse(stringified);
         try {
             document = await Category.findByIdAndUpdate(
                 {
@@ -43,7 +41,7 @@ const categoryController = {
         } catch (error) {
             return next(error)
         }
-        res.status(201).json(parsedObj)
+        res.status(201).json(document)
     },
 
     //Get category by id
