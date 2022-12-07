@@ -25,9 +25,10 @@ const categoryController = {
     async edit(req, res, next) {
         const { name, description, isActive } = req.body
         let document
-
+        var stringified = JSON.stringify(document);
+        var parsedObj = JSON.parse(stringified);
         try {
-            document = await Category.findOneAndUpdate(
+            document = await Category.findByIdAndUpdate(
                 {
                     _id: req.params.id
                 },
@@ -42,16 +43,16 @@ const categoryController = {
         } catch (error) {
             return next(error)
         }
-        return res.json(document)
+        res.status(201).json(parsedObj)
     },
 
     //Get category by id
-    async show(req,res,next){
+    async show(req, res, next) {
         let document
         try {
             document = await Category.findOne(
                 {
-                    _id : req.params.id
+                    _id: req.params.id
                 }
             )
         } catch (error) {
@@ -62,13 +63,13 @@ const categoryController = {
     },
 
     //Get All
-    async index(req,res,next){
+    async index(req, res, next) {
         let documents
 
         try {
             documents = await Category.find().select('-updatedAt -__v').sort(
                 {
-                    _id:-1
+                    _id: -1
                 }
             )
         } catch (error) {
@@ -79,14 +80,14 @@ const categoryController = {
     },
 
     //Delete
-    async destroy(req,res,next) {
+    async destroy(req, res, next) {
         const document = await Category.findOneAndRemove(
             {
-                _id:req.params.id
+                _id: req.params.id
             }
         )
-        if(!document){
-            return next(new Error('Nothing to delete'))       
+        if (!document) {
+            return next(new Error('Nothing to delete'))
         }
 
         return res.json(document)

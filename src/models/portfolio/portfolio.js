@@ -22,3 +22,5 @@ const portfolioSchema = new Schema(
         }
     }
 )
+
+export default mongoose.model('Portfolio',portfolioSchema,'portfolios')

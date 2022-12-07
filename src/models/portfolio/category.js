@@ -10,6 +10,12 @@ const categorySchema = new Schema(
             required:true,
             unique:true
         },
+        works:[
+            {
+                type:'ObjectId',
+                ref:'Portfolio'
+            }    
+        ],
         description:{
             type:String,
             required:false

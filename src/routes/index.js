@@ -14,16 +14,17 @@ router.post('/auth/refresh', refreshController.refresh)
 
 router.post('/auth/logout', loginController.logout)
 
+
 router.post('/store/portfolio_category', [auth, admin], categoryController.store)
 
-router.post('/edit/portfolio_category/:id', [auth, admin], categoryController.edit)
+router.put('/edit/portfolio_category/:id', categoryController.edit)
 router.delete('/destroy/portfolio_category/:id', [auth, admin], categoryController.destroy)
 router.get('/view/portfolio_categories', categoryController.index)
 router.get('/view/portfolio_category/:id', categoryController.show)
 
 router.post('/store/certificate_category',[auth,admin], certificateCategController.store)
 
-router.post('/edit/certificate_category/:id',[auth,admin], certificateCategController.edit)
+router.put('/edit/certificate_category/:id',[auth,admin], certificateCategController.edit)
 router.delete('/destroy/certificate_category/:id',[auth,admin], certificateCategController.destroy)
 router.get('/view/certificate_categories', certificateCategController.index)
 router.get('/view/certificate_category/:id', certificateCategController.show)

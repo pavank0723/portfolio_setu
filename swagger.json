@@ -4,11 +4,11 @@
         "version": "1.0.0",
         "title": "Portfolio Setu",
         "description": "This is <b>Pavan's</b> Portfolio api using NodeJS.",
-        "termsOfService":"http://api_url/terms/",
-        "contact":{
-            "name":"Pavan Yadav",
-            "email":"pavan.yadav0723@gmail.com",
-            "url":"https://pavan-dev-portfolio.netlify.app/"
+        "termsOfService": "https://pavan-dev-portfolio.netlify.app/",
+        "contact": {
+            "name": "Pavan Yadav",
+            "email": "pavan.yadav0723@gmail.com",
+            "url": "https://pavan-dev-portfolio.netlify.app/"
         }
     },
     "host": "localhost:5100",
@@ -57,7 +57,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "description": "Login and get the token",
+                "summary": "Login and get the token",
                 "parameters": [
                     {
                         "name": "obj",
@@ -68,7 +68,38 @@
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/TokenGenerateModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Wrong Credentials",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
             }
         },
         "/auth/register": {
@@ -76,7 +107,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "description": "Register user",
+                "summary": "Create a new user",
                 "parameters": [
                     {
                         "name": "obj",
@@ -88,9 +119,37 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/TokenGenerateModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
+                    
                 },
                 "security": [
                     {
@@ -104,19 +163,37 @@
                 "tags": [
                     "Auth"
                 ],
-                "description": "Get the user required details",
+                "summary": "Get the user required details",
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
                     },
                     "401": {
-                        "description": "Unauthorized"
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     },
                     "404": {
-                        "description": "Not Found"
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     },
                     "500": {
-                        "description": "Internal Server Error"
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "security": [
@@ -131,7 +208,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "description": "Refresh token and access token generated",
+                "summary": "Refresh token and access token generated",
                 "parameters": [
                     {
                         "name": "refresh_token",
@@ -142,7 +219,38 @@
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
             }
         },
         "/auth/logout": {
@@ -150,7 +258,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "description": "Logout the user token i.e. delete the token",
+                "summary": "Logout the user token and delete the token",
                 "parameters": [
                     {
                         "name": "obj",
@@ -161,7 +269,38 @@
                         }
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
             }
         },
         "/store/portfolio_category": {
@@ -169,7 +308,7 @@
                 "tags": [
                     "Portfolio"
                 ],
-                "description": "Add portfolio category",
+                "summary": "Add portfolio category",
                 "parameters": [
                     {
                         "name": "obj",
@@ -181,8 +320,35 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "security": [
@@ -206,7 +372,7 @@
                 "tags": [
                     "Portfolio"
                 ],
-                "description": "Update details of portfolio category",
+                "summary": "Update details of portfolio category",
                 "parameters": [
                     {
                         "name": "name",
@@ -225,12 +391,38 @@
                         "type": "boolean"
                     }
                 ],
-                "responses": {},
-                "security": [
-                    {
-                        "Authorization": []
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
-                ]
+                }
             }
         },
         "/view/portfolio_categories": {
@@ -238,8 +430,39 @@
                 "tags": [
                     "Portfolio"
                 ],
-                "description": "View all portfolio category",
-                "responses": {}
+                "summary": "View all portfolio category",
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
             }
         },
         "/destroy/portfolio_category/{id}": {
@@ -255,8 +478,39 @@
                 "tags": [
                     "Portfolio"
                 ],
-                "description": "Delete the particular portfolio category by ID",
-                "responses": {},
+                "summary": "Delete the particular portfolio category by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
                 "security": [
                     {
                         "Authorization": []
@@ -277,16 +531,47 @@
                 "tags": [
                     "Portfolio"
                 ],
-                "description": "View the portfolio_category detail by ID",
-                "responses": {}
+                "summary": "View the portfolio_category detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
             }
         },
         "/store/certificate_category": {
-            "post": {
+            "put": {
                 "tags": [
                     "Certificates"
                 ],
-                "description": "Add portfolio category",
+                "summary": "Add portfolio category",
                 "parameters": [
                     {
                         "name": "obj",
@@ -298,8 +583,35 @@
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
                     }
                 },
                 "security": [
@@ -323,7 +635,7 @@
                 "tags": [
                     "Certificates"
                 ],
-                "description": "Update details of portfolio category",
+                "summary": "Update details of portfolio category",
                 "parameters": [
                     {
                         "name": "name",
@@ -342,7 +654,38 @@
                         "type": "boolean"
                     }
                 ],
-                "responses": {},
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
                 "security": [
                     {
                         "Authorization": []
@@ -355,8 +698,39 @@
                 "tags": [
                     "Certificates"
                 ],
-                "description": "View all certificate category",
-                "responses": {}
+                "summary": "View all certificate category",
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
             }
         },
         "/destroy/certificate_category/{id}": {
@@ -372,8 +746,39 @@
                 "tags": [
                     "Certificates"
                 ],
-                "description": "Delete the particular certificate category by ID",
-                "responses": {},
+                "summary": "Delete the particular certificate category by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
                 "security": [
                     {
                         "Authorization": []
@@ -394,8 +799,39 @@
                 "tags": [
                     "Certificates"
                 ],
-                "description": "View the certificate category detail by ID",
-                "responses": {}
+                "summary": "View the certificate category detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
             }
         }
     },
@@ -494,6 +930,29 @@
             "required": [
                 "name"
             ]
+        },
+        "TokenGenerateModel":{
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "SampleModel":{
+            "type": "object",
+            "description":"All the required response"
+        },
+        "ErrorModel":{
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
         }
     }
 }
