@@ -423,7 +423,12 @@
                             "$ref": "#/definitions/ErrorModel"
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         },
         "/view/portfolio_categories": {
@@ -568,7 +573,7 @@
             }
         },
         "/store/certificate_category": {
-            "put": {
+            "post": {
                 "tags": [
                     "Certificates"
                 ],
@@ -637,6 +642,7 @@
                     "Certificates"
                 ],
                 "summary": "Update details of portfolio category",
+                "consumes": ["application/x-www-form-urlencoded"],
                 "parameters": [
                     {
                         "name": "name",
