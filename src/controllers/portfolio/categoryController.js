@@ -1,4 +1,5 @@
-import { Category } from "../../models"
+import { PortfolioCateg } from "../../models"
+import { portfolioCategorySchema } from "../../validations/portfolioValidator"
 
 const categoryController = {
     //Create 
@@ -7,7 +8,7 @@ const categoryController = {
         const { cat_id, name, description, isActive } = req.body
         let document
         try {
-            document = await Category.create(
+            document = await PortfolioCateg.create(
                 {
                     cat_id,
                     name,
@@ -23,10 +24,12 @@ const categoryController = {
 
     //Update
     async edit(req, res, next) {
+        const {error} = portfolioCategorySchema.validate(req.body)
+
         const { name, description, isActive } = req.body
         let document
         try {
-            document = await Category.findByIdAndUpdate(
+            document = await PortfolioCateg.findByIdAndUpdate(
                 {
                     _id: req.params.id
                 },
@@ -48,7 +51,7 @@ const categoryController = {
     async show(req, res, next) {
         let document
         try {
-            document = await Category.findOne(
+            document = await PortfolioCateg.findOne(
                 {
                     _id: req.params.id
                 }
@@ -65,7 +68,7 @@ const categoryController = {
         let documents
 
         try {
-            documents = await Category.find().select('-updatedAt -__v').sort(
+            documents = await PortfolioCateg.find().select('-updatedAt -__v').sort(
                 {
                     _id: -1
                 }
@@ -79,7 +82,7 @@ const categoryController = {
 
     //Delete
     async destroy(req, res, next) {
-        const document = await Category.findOneAndRemove(
+        const document = await PortfolioCateg.findOneAndRemove(
             {
                 _id: req.params.id
             }

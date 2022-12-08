@@ -377,8 +377,7 @@
                 "parameters": [
                     {
                         "name": "name",
-                        "in": "formData",
-                        "required": true
+                        "in": "formData"
                     },
                     {
                         "name": "description",
