@@ -7,3 +7,11 @@ export const portfolioCategorySchema = Joi.object(
         isActive: Joi.boolean(),
     }
 )
+
+export const portfolioSchema = Joi.object(
+    {
+        title :Joi.string().required(),
+        demo:Joi.string(),
+        image:Joi.string(),
+    }
+)

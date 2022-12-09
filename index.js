@@ -8,13 +8,15 @@ import path from 'path'
 import swaggerUi  from 'swagger-ui-express'
 import swaggerDocument from './swagger.json'
 
-import multer from 'multer'
-
-const upload = multer()
-
-const app = express()
+// import multer from 'multer'
 
 import routes from './src/routes'
+
+// const upload = multer()
+const app = express()
+
+//📌Note: By default JSON in Express JS --==> ❎disable 
+app.use(express.json()) //✅ Enable
 
 //#region 🔗DB Connection 
 mongoose.connect(DB_URL)
@@ -36,19 +38,18 @@ var options = {
 app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument,options))
 //#endregion
 
-//📌Note: By default JSON in Express JS --==> ❎disable 
-app.use(express.json()) //✅ Enable
-
-//📌Note: For view image globally
-app.use('/uploads',express.static('uploads'))
+// For parsing multipart/form-data
+// app.use(upload.array())
 
 //Get root folder
 global.appRoot = path.resolve(__dirname)
 // For parsing application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.urlencoded({extended:false}))
 
-// For parsing multipart/form-data
-app.use(upload.array()); 
+
+//📌Note: For view image globally
+// app.use('/uploads',express.static('/uploads'))
+app.use('/uploads',express.static('uploads'))
 
 //Routes
 app.use(routes)

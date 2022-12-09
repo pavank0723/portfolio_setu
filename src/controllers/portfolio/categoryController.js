@@ -1,12 +1,11 @@
 import { PortfolioCateg } from "../../models"
-import { portfolioCategorySchema } from "../../validations/portfolioValidator"
 
 const categoryController = {
     //Create 
     async store(req, res, next) {
-
         const { cat_id, name, description, isActive } = req.body
         let document
+
         try {
             document = await PortfolioCateg.create(
                 {
@@ -24,7 +23,6 @@ const categoryController = {
 
     //Update
     async edit(req, res, next) {
-        const {error} = portfolioCategorySchema.validate(req.body)
 
         const { name, description, isActive } = req.body
         let document

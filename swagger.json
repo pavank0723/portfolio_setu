@@ -358,6 +358,76 @@
                 ]
             }
         },
+        "/view/portfolio_categories": {
+            "get": {
+                "tags": [
+                    "Portfolio"
+                ],
+                "summary": "View all portfolio category",
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/view/portfolio_category/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of portfolio_category that we want to find"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Portfolio"
+                ],
+                "summary": "View the portfolio_category detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
         "/edit/portfolio_category/{id}": {
             "parameters": [
                 {
@@ -430,46 +500,6 @@
                 ]
             }
         },
-        "/view/portfolio_categories": {
-            "get": {
-                "tags": [
-                    "Portfolio"
-                ],
-                "summary": "View all portfolio category",
-                "responses": {
-                    "200": {
-                        "description": "Successfully login",
-                        "schema": {
-                            "$ref": "#/definitions/SampleModel"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    }
-                }
-            }
-        },
         "/destroy/portfolio_category/{id}": {
             "parameters": [
                 {
@@ -523,23 +553,143 @@
                 ]
             }
         },
-        "/view/portfolio_category/{id}": {
+        "/store/portfolio":{
+            "post": {
+                "tags": [
+                    "Portfolio"
+                ],
+                "summary": "Add work in portfolio",
+                "consumes": ["multipart/form-data","application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "name": "demo",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "type": "file",
+                        "required":true
+                    }
+                ],
+                "responses": {},
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/view/portfolio": {
+            "get": {
+                "tags": [
+                    "Portfolio"
+                ],
+                "summary": "View all portfolio work",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/view/portfolio/{id}": {
             "parameters": [
                 {
                     "name": "id",
                     "in": "path",
-                    "required": true,
-                    "description": "ID of portfolio_category that we wantn to find"
+                    "required": true
                 }
             ],
             "get": {
                 "tags": [
                     "Portfolio"
                 ],
-                "summary": "View the portfolio_category detail by ID",
+                "summary": "View the portfolio work detail by ID",
                 "responses": {
                     "200": {
                         "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/edit/portfolio/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of portfolio that we want to find",
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "Portfolio"
+                ],
+                "summary": "Update details of portfolio",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "demo",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -568,7 +718,65 @@
                             "$ref": "#/definitions/ErrorModel"
                         }
                     }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/destroy/portfolio/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
                 }
+            ],
+            "delete": {
+                "tags": [
+                    "Portfolio"
+                ],
+                "summary": "Delete the particular portfolio work by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         },
         "/store/certificate_category": {
@@ -624,6 +832,76 @@
                         "Authorization": []
                     }
                 ]
+            }
+        },
+        "/view/certificate_categories": {
+            "get": {
+                "tags": [
+                    "Certificates"
+                ],
+                "summary": "View all certificate category",
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/view/certificate_category/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of certificate category that we wantn to find"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Certificates"
+                ],
+                "summary": "View the certificate category detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully login",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
             }
         },
         "/edit/certificate_category/{id}": {
@@ -699,46 +977,6 @@
                 ]
             }
         },
-        "/view/certificate_categories": {
-            "get": {
-                "tags": [
-                    "Certificates"
-                ],
-                "summary": "View all certificate category",
-                "responses": {
-                    "200": {
-                        "description": "Successfully login",
-                        "schema": {
-                            "$ref": "#/definitions/SampleModel"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    }
-                }
-            }
-        },
         "/destroy/certificate_category/{id}": {
             "parameters": [
                 {
@@ -790,54 +1028,6 @@
                         "Authorization": []
                     }
                 ]
-            }
-        },
-        "/view/certificate_category/{id}": {
-            "parameters": [
-                {
-                    "name": "id",
-                    "in": "path",
-                    "required": true,
-                    "description": "ID of certificate category that we wantn to find"
-                }
-            ],
-            "get": {
-                "tags": [
-                    "Certificates"
-                ],
-                "summary": "View the certificate category detail by ID",
-                "responses": {
-                    "200": {
-                        "description": "Successfully login",
-                        "schema": {
-                            "$ref": "#/definitions/SampleModel"
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    },
-                    "500": {
-                        "description": "Internal server error",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorModel"
-                        }
-                    }
-                }
             }
         }
     },
