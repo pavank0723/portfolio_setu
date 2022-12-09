@@ -1,5 +1,5 @@
 import express from "express"
-import { categoryController, certificateCategController, loginController, refreshController, registerController, userController, workController } from "../controllers"
+import { categoryController, certificateCategController, certificateController, loginController, refreshController, registerController, userController, workController } from "../controllers"
 import { admin, auth } from "../middlewares"
 
 const router = express.Router()
@@ -21,7 +21,7 @@ router.get('/view/portfolio_category/:id', categoryController.show)
 router.put('/edit/portfolio_category/:id',[auth, admin], categoryController.edit)
 router.delete('/destroy/portfolio_category/:id', [auth, admin], categoryController.destroy)
 
-router.post('/store/portfolio',[auth,admin],workController.store)
+router.post('/store/portfolio',workController.store)
 router.get('/view/portfolio',workController.view)
 router.get('/view/portfolio/:id',workController.show)
 router.put('/edit/portfolio/:id',[auth,admin],workController.edit)
@@ -32,5 +32,11 @@ router.get('/view/certificate_categories', certificateCategController.index)
 router.get('/view/certificate_category/:id', certificateCategController.show)
 router.put('/edit/certificate_category/:id',[auth, admin], certificateCategController.edit)
 router.delete('/destroy/certificate_category/:id',[auth,admin], certificateCategController.destroy)
+
+router.post('/store/certificate',certificateController.store)
+router.get('/view/certificate',certificateController.view)
+router.get('/view/certificate/:id',certificateController.show)
+router.put('/edit/certificate/:id',certificateController.edit)
+router.delete('/destroy/certificate/:id',certificateController.destroy)
 
 export default router

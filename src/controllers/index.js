@@ -5,4 +5,5 @@ export { default as userController } from './auth/userController'
 
 export { default as categoryController } from './portfolio/categoryController'
 export { default as workController } from './portfolio/workController'
-export { default as certificateCategController } from './achievents/certificateCategController'
+export { default as certificateCategController } from './achievements/certificateCategController'
+export { default as certificateController } from './achievements/certificateController'
