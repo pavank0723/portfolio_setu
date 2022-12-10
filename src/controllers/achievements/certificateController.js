@@ -7,7 +7,7 @@ import { Certificate } from "../../models"
 
 const storage = multer.diskStorage(
     {
-        destination: (req, file, cb) => cb(null, "uploads/certificate/"),
+        destination: (req, file, cb) => cb(null, "uploads/certificates/"),
         filename: (req, file, cb) => {
             const uniqueName = `certificate_${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`
             cb(null, uniqueName)

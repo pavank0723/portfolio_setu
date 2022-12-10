@@ -25,6 +25,10 @@
         {
             "name": "Certificates",
             "description": "All certificate methods"
+        },
+        {
+            "name": "Skills",
+            "description": "All skill methods"
         }
     ],
     "schemes": [
@@ -120,7 +124,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully register",
                         "schema": {
                             "$ref": "#/definitions/TokenGenerateModel"
                         }
@@ -166,7 +170,7 @@
                 "summary": "Get the user required details",
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully fetched",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -221,7 +225,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully generated",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -271,7 +275,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully logout",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -321,7 +325,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully added",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -366,7 +370,7 @@
                 "summary": "View all portfolio category",
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully fetched",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -402,7 +406,7 @@
                 "summary": "View the portfolio_category detail by ID",
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully fetched",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -463,7 +467,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully modified",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -516,7 +520,7 @@
                 "summary": "Delete the particular portfolio category by ID",
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully deleted",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -580,7 +584,7 @@
                 "responses": {}
             }
         },
-        "/view/portfolio": {
+        "/view/portfolios": {
             "get": {
                 "tags": [
                     "Portfolio"
@@ -792,7 +796,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully added",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -837,7 +841,7 @@
                 "summary": "View all certificate category",
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully fetched",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -873,7 +877,7 @@
                 "summary": "View the certificate category detail by ID",
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully fetched",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -935,7 +939,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully modified",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -988,7 +992,7 @@
                 "summary": "Delete the particular certificate category by ID",
                 "responses": {
                     "200": {
-                        "description": "Successfully login",
+                        "description": "Successfully deleted",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -1049,10 +1053,46 @@
                         "required":true
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         },
-        "/view/certificate": {
+        "/view/certificates": {
             "get": {
                 "tags": [
                     "Certificates"
@@ -1185,7 +1225,12 @@
                             "$ref": "#/definitions/ErrorModel"
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         },
         "/destroy/certificate/{id}": {
@@ -1233,7 +1278,268 @@
                             "$ref": "#/definitions/ErrorModel"
                         }
                     }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/store/skill_category": {
+            "post": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "Add skill category",
+                "parameters": [
+                    {
+                        "name": "obj",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SkillCategModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/view/skill_categories": {
+            "get": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "View all skill category",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
                 }
+            }
+        },
+        "/view/skill_category/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of skill category that we wantn to find"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "View the skill category detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/edit/skill_category/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of skill category that we want to find",
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "Update details of skill category",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "icon",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "isActive",
+                        "in": "formData",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully modified",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/destroy/skill_category/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "Delete the particular skill category by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         }
     },
@@ -1331,6 +1637,31 @@
             },
             "required": [
                 "name"
+            ]
+        },
+        "SkillCategModel": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "skill category 0"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "This is skill category 0 description"
+                },
+                "icon": {
+                    "type": "string",
+                    "example": "uil-brackets-curly"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "example": true
+                }
+            },
+            "required": [
+                "name",
+                "icon"
             ]
         },
         "TokenGenerateModel":{

@@ -1,6 +1,6 @@
 import { PortfolioCateg } from "../../models"
 
-const categoryController = {
+const portfolioCategController = {
     //Create 
     async store(req, res, next) {
         const { cat_id, name, description, isActive } = req.body
@@ -93,4 +93,4 @@ const categoryController = {
     }
 }
 
-export default categoryController
+export default portfolioCategController
