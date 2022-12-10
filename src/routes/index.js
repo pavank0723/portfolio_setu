@@ -1,5 +1,5 @@
 import express from "express"
-import { portfolioCategController, certificateCategController, certificateController, loginController, refreshController, registerController, userController, workController, skillCategController } from "../controllers"
+import { portfolioCategController, certificateCategController, certificateController, loginController, refreshController, registerController, userController, workController, skillCategController, techSkillController } from "../controllers"
 import { admin, auth } from "../middlewares"
 
 const router = express.Router()
@@ -44,5 +44,11 @@ router.get('/view/skill_categories',skillCategController.show)
 router.get('/view/skill_category/:id',skillCategController.index)
 router.put('/edit/skill_category/:id',[auth, admin],skillCategController.edit)
 router.delete('/destroy/skill_category/:id',[auth, admin],skillCategController.destroy)
+
+router.post('/store/skill',[auth, admin],techSkillController.store)
+router.get('/view/skills',techSkillController.show)
+router.get('/view/skill/:id',techSkillController.index)
+router.put('/edit/skill/:id',[auth, admin],techSkillController.edit)
+router.delete('/destroy/skill/:id',[auth, admin],techSkillController.destroy)
 
 export default router

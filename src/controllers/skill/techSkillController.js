@@ -2,14 +2,14 @@ import CustomErrorHandler from "../../services/CustomErrorHandler"
 import fs from "fs"
 import path from "path"
 import multer from "multer"
-import { certificateSchema } from "../../validations/achievementValidator"
-import { Certificate } from "../../models"
+import { TechSkill } from "../../models"
+import { skillSchema } from "../../validations/skillValidator"
 
 const storage = multer.diskStorage(
     {
-        destination: (req, file, cb) => cb(null, "uploads/achievements/"),
+        destination: (req, file, cb) => cb(null, "uploads/skills/"),
         filename: (req, file, cb) => {
-            const uniqueName = `certificate_${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`
+            const uniqueName = `skill_${Date.now()}-${Math.round(Math.random() * 1e9)}${path.extname(file.originalname)}`
             cb(null, uniqueName)
         }
     }
@@ -24,7 +24,7 @@ const handleMultipartData = multer(
     }
 ).single('image')
 
-const certificateController = {
+const techSkillController = {
     //Create
     async store(req, res, next) {
 
@@ -43,7 +43,7 @@ const certificateController = {
             //Validation from productValidator
 
             //==--->> 2. Joi Validate if error
-            const { error } = certificateSchema.validate(req.body)
+            const { error } = skillSchema.validate(req.body)
             if (error) {
                 //Delete the uploaded file when validation failed
                 fs.unlink(`${appRoot}/${filePath}`, (err) => { //root_folder/upload/products.extenstion(png/jpg)
@@ -54,14 +54,14 @@ const certificateController = {
                 )
                 return next(error)
             }
-            const { title, demo } = req.body
+            const { title, subtitle } = req.body
             let document
 
             try {
-                document = await Certificate.create(
+                document = await TechSkill.create(
                     {
                         title,
-                        demo,
+                        subtitle,
                         image: filePath
                     }
                 )
@@ -74,10 +74,10 @@ const certificateController = {
     },
     
     //Read all work
-    async view(req, res, next) {
+    async show(req, res, next) {
         let documents
         try {
-            documents = await Certificate.find().select('-updatedAt -__v').sort(
+            documents = await TechSkill.find().select('-updatedAt -__v').sort(
                 {
                     _id: -1
                 }
@@ -89,10 +89,10 @@ const certificateController = {
     },
 
     //Read work by ID
-    async show(req, res, next) {
+    async index(req, res, next) {
         let document
         try {
-            document = await Certificate.findOne(
+            document = await TechSkill.findOne(
                 {
                     _id: req.params.id
                 }
@@ -117,10 +117,10 @@ const certificateController = {
             console.log("===>>>>>>", filePath)
 
             //Validation
-            const certificateValidator = certificateSchema.validate(req.body)
+            const skillValidator = skillSchema.validate(req.body)
 
             //Joi Validate 
-            const { error } = certificateValidator
+            const { error } = skillValidator
 
             if (error) {
                 //Delete file when validation failed
@@ -133,7 +133,7 @@ const certificateController = {
                 }
                 return next(error)
             }
-            const imageRemove = await Certificate.findOne(
+            const imageRemove = await TechSkill.findOne(
                 {
                     _id: req.params.id
                 }
@@ -149,17 +149,17 @@ const certificateController = {
                 }
                 else {
                     //Update part
-                    const { title, demo } = req.body
+                    const { title, subtitle } = req.body
                     let document
 
                     try {
-                        document = await Certificate.findOneAndUpdate(
+                        document = await TechSkill.findOneAndUpdate(
                             {
                                 _id: req.params.id
                             },
                             {
                                 title,
-                                demo,
+                                subtitle,
                                 ...(req.file && { image: filePath })
                             },
                             {
@@ -180,7 +180,7 @@ const certificateController = {
 
     //Delete
     async destroy(req, res, next) {
-        const document = await Certificate.findOneAndRemove(
+        const document = await TechSkill.findOneAndRemove(
             {
                 _id: req.params.id
             }
@@ -202,4 +202,4 @@ const certificateController = {
 
 }
 
-export default certificateController
+export default techSkillController

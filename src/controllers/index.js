@@ -9,3 +9,4 @@ export { default as certificateCategController } from './achievements/certificat
 export { default as certificateController } from './achievements/certificateController'
 
 export { default as skillCategController } from './skill/categoryController'
+export { default as techSkillController } from './skill/techSkillController'

@@ -9,3 +9,4 @@ export { default as Portfolio } from './work/portfolio'
 export { default as Certificate } from './achievements/certificate'
 
 export { default as SkillCateg } from './skill/category'
+export { default as TechSkill } from './skill/tech'
