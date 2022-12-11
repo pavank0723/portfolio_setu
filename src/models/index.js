@@ -1,12 +1,12 @@
-export { default as User } from './auth/user'
-export { default as RefreshToken } from './auth/refreshToken'
-export { default as PortfolioCateg } from './work/category'
+export { default as User } from './auth/userModel'
+export { default as RefreshToken } from './auth/refreshTokenModel'
+export { default as PortfolioCateg } from './work/categoryModel'
 
-export { default as CertificateCateg } from './achievements/category'
+export { default as CertificateCateg } from './achievements/categoryModel'
 
-export { default as Portfolio } from './work/portfolio'
+export { default as Portfolio } from './work/portfolioModel'
 
-export { default as Certificate } from './achievements/certificate'
+export { default as Certificate } from './achievements/certificateModel'
 
-export { default as SkillCateg } from './skill/category'
-export { default as TechSkill } from './skill/tech'
+export { default as SkillCateg } from './skill/categoryModel'
+export { default as TechSkill } from './skill/techSkillModel'

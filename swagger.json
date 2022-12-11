@@ -585,7 +585,12 @@
                         "required":true
                     }
                 ],
-                "responses": {}
+                "responses": {},
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
             }
         },
         "/portfolio/views": {
