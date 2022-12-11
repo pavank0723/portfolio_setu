@@ -1,9 +1,9 @@
+import { TechSkill } from "../../models"
 import CustomErrorHandler from "../../services/CustomErrorHandler"
 import fs from "fs"
+import { skillSchema } from "../../validations/skillValidator"
 import path from "path"
 import multer from "multer"
-import { TechSkill } from "../../models"
-import { skillSchema } from "../../validations/skillValidator"
 
 const storage = multer.diskStorage(
     {
@@ -32,13 +32,13 @@ const techSkillController = {
         handleMultipartData(req, res, async (err) => {
             if (err) {
                 return next(CustomErrorHandler.serverError(err.message))
-            }
+            } 
             // console.log(req.body)
-
-            const filePath = req.file.path.replace(/\\/g, "/")
+            const filePath = req.file.path.replace(/\\/g,"/")
 
             // var newFilePath = filePath.split('\\').join('/')
             console.log('==>>>>>>>', filePath)
+
 
             //Validation from productValidator
 
@@ -66,13 +66,20 @@ const techSkillController = {
                     }
                 )
             } catch (error) {
+                //Delete the uploaded file when validation failed
+                fs.unlink(`${appRoot}/${filePath}`, (error) => { //root_folder/upload/products.extenstion(png/jpg)
+                    if (error) {
+                        return next(CustomErrorHandler.serverError(error.message))
+                    }
+                }
+                )
                 return next(error)
             }
             res.status(201).json(document)
         }
         )
     },
-    
+
     //Read all work
     async show(req, res, next) {
         let documents
@@ -196,8 +203,9 @@ const techSkillController = {
             if (err) {
                 return next(CustomErrorHandler.serverError())
             }
-            res.json(document)
+
         })
+        res.json(document)
     }
 
 }

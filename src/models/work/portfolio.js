@@ -7,6 +7,7 @@ const portfolioSchema = new Schema(
     {
         title:{
             type:String,
+            unique:true,
             required:true
         },
         demo:{

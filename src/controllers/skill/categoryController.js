@@ -91,7 +91,7 @@ const skillCategController = {
             return next(new Error('Nothing to delete'))
         }
 
-        return res.json(document)
+        res.json(document)
     }
 }
 

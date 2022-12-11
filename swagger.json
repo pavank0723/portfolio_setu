@@ -20,15 +20,19 @@
         },
         {
             "name": "Portfolio",
-            "description": "All working portfolio methods"
+            "description": "Most recent works"
         },
         {
-            "name": "Certificates",
-            "description": "All certificate methods"
+            "name": "Achievements",
+            "description": "My all certificates"
         },
         {
             "name": "Skills",
-            "description": "All skill methods"
+            "description": "My technical skills"
+        },
+        {
+            "name": "Qualification",
+            "description": "My personal journey"
         }
     ],
     "schemes": [
@@ -307,7 +311,7 @@
                 }
             }
         },
-        "/store/portfolio_category": {
+        "/portfolio_category/store": {
             "post": {
                 "tags": [
                     "Portfolio"
@@ -362,7 +366,7 @@
                 ]
             }
         },
-        "/view/portfolio_categories": {
+        "/portfolio_category/views": {
             "get": {
                 "tags": [
                     "Portfolio"
@@ -390,7 +394,7 @@
                 }
             }
         },
-        "/view/portfolio_category/{id}": {
+        "/portfolio_category/view/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -432,7 +436,7 @@
                 }
             }
         },
-        "/edit/portfolio_category/{id}": {
+        "/portfolio_category/edit/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -504,7 +508,7 @@
                 ]
             }
         },
-        "/destroy/portfolio_category/{id}": {
+        "/portfolio_category/destroy/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -557,7 +561,7 @@
                 ]
             }
         },
-        "/store/portfolio":{
+        "/portfolio/store":{
             "post": {
                 "tags": [
                     "Portfolio"
@@ -584,7 +588,7 @@
                 "responses": {}
             }
         },
-        "/view/portfolios": {
+        "/portfolio/views": {
             "get": {
                 "tags": [
                     "Portfolio"
@@ -612,7 +616,7 @@
                 }
             }
         },
-        "/view/portfolio/{id}": {
+        "/portfolio/view/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -653,7 +657,7 @@
                 }
             }
         },
-        "/edit/portfolio/{id}": {
+        "/portfolio/edit/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -725,7 +729,7 @@
                 ]
             }
         },
-        "/destroy/portfolio/{id}": {
+        "/portfolio/destroy/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -778,10 +782,10 @@
                 ]
             }
         },
-        "/store/certificate_category": {
+        "/certificate_category/store": {
             "post": {
                 "tags": [
-                    "Certificates"
+                    "Achievements"
                 ],
                 "summary": "Add portfolio category",
                 "parameters": [
@@ -833,10 +837,10 @@
                 ]
             }
         },
-        "/view/certificate_categories": {
+        "/certificate_category/views": {
             "get": {
                 "tags": [
-                    "Certificates"
+                    "Achievements"
                 ],
                 "summary": "View all certificate category",
                 "responses": {
@@ -861,7 +865,7 @@
                 }
             }
         },
-        "/view/certificate_category/{id}": {
+        "/certificate_category/view/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -872,7 +876,7 @@
             ],
             "get": {
                 "tags": [
-                    "Certificates"
+                    "Achievements"
                 ],
                 "summary": "View the certificate category detail by ID",
                 "responses": {
@@ -903,7 +907,7 @@
                 }
             }
         },
-        "/edit/certificate_category/{id}": {
+        "/certificate_category/edit/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -915,7 +919,7 @@
             ],
             "put": {
                 "tags": [
-                    "Certificates"
+                    "Achievements"
                 ],
                 "summary": "Update details of portfolio category",
                 "consumes": ["application/x-www-form-urlencoded"],
@@ -976,7 +980,7 @@
                 ]
             }
         },
-        "/destroy/certificate_category/{id}": {
+        "/certificate_category/destroy/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -987,7 +991,7 @@
             ],
             "delete": {
                 "tags": [
-                    "Certificates"
+                    "Achievements"
                 ],
                 "summary": "Delete the particular certificate category by ID",
                 "responses": {
@@ -1029,10 +1033,10 @@
                 ]
             }
         },
-        "/store/certificate":{
+        "/certificate/store":{
             "post": {
                 "tags": [
-                    "Certificates"
+                    "Achievements"
                 ],
                 "summary": "Add certificate in achievement",
                 "consumes": ["multipart/form-data","application/x-www-form-urlencoded"],
@@ -1092,10 +1096,10 @@
                 ]
             }
         },
-        "/view/certificates": {
+        "/certificate/views": {
             "get": {
                 "tags": [
-                    "Certificates"
+                    "Achievements"
                 ],
                 "summary": "View all achievement certificate",
                 "responses": {
@@ -1120,7 +1124,7 @@
                 }
             }
         },
-        "/view/certificate/{id}": {
+        "/certificate/view/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -1130,7 +1134,7 @@
             ],
             "get": {
                 "tags": [
-                    "Certificates"
+                    "Achievements"
                 ],
                 "summary": "View the achievement certificate detail by ID",
                 "responses": {
@@ -1161,7 +1165,7 @@
                 }
             }
         },
-        "/edit/certificate/{id}": {
+        "/certificate/edit/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -1173,7 +1177,7 @@
             ],
             "put": {
                 "tags": [
-                    "Certificates"
+                    "Achievements"
                 ],
                 "summary": "Update details of certificate",
                 "consumes": ["application/x-www-form-urlencoded"],
@@ -1233,7 +1237,7 @@
                 ]
             }
         },
-        "/destroy/certificate/{id}": {
+        "/certificate/destroy/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -1244,7 +1248,7 @@
             ],
             "delete": {
                 "tags": [
-                    "Certificates"
+                    "Achievements"
                 ],
                 "summary": "Delete the particular achievement certificate by ID",
                 "responses": {
@@ -1286,7 +1290,7 @@
                 ]
             }
         },
-        "/store/skill_category": {
+        "/skill_category/store": {
             "post": {
                 "tags": [
                     "Skills"
@@ -1341,7 +1345,7 @@
                 ]
             }
         },
-        "/view/skill_categories": {
+        "/skill_category/views": {
             "get": {
                 "tags": [
                     "Skills"
@@ -1369,7 +1373,7 @@
                 }
             }
         },
-        "/view/skill_category/{id}": {
+        "/skill_category/view/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -1411,7 +1415,7 @@
                 }
             }
         },
-        "/edit/skill_category/{id}": {
+        "/skill_category/edit/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -1489,7 +1493,7 @@
                 ]
             }
         },
-        "/destroy/skill_category/{id}": {
+        "/skill_category/destroy/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -1542,7 +1546,7 @@
                 ]
             }
         },
-        "/store/skill":{
+        "/skill/store":{
             "post": {
                 "tags": [
                     "Skills"
@@ -1605,7 +1609,7 @@
                 ]
             }
         },
-        "/view/skills": {
+        "/skill/views": {
             "get": {
                 "tags": [
                     "Skills"
@@ -1633,7 +1637,7 @@
                 }
             }
         },
-        "/view/skill/{id}": {
+        "/skill/view/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -1674,7 +1678,7 @@
                 }
             }
         },
-        "/edit/skill/{id}": {
+        "/skill/edit/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -1746,7 +1750,7 @@
                 ]
             }
         },
-        "/destroy/skill/{id}": {
+        "/skill/destroy/{id}": {
             "parameters": [
                 {
                     "name": "id",

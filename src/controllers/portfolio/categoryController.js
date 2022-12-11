@@ -27,7 +27,7 @@ const portfolioCategController = {
         const { name, description, isActive } = req.body
         let document
         try {
-            document = await PortfolioCateg.findByIdAndUpdate(
+            document = await PortfolioCateg.findOneAndUpdate(
                 {
                     _id: req.params.id
                 },
@@ -89,7 +89,7 @@ const portfolioCategController = {
             return next(new Error('Nothing to delete'))
         }
 
-        return res.json(document)
+        res.json(document)
     }
 }
 

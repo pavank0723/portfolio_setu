@@ -67,6 +67,13 @@ const workController = {
                     }
                 )
             } catch (error) {
+                //Delete the uploaded file when validation failed
+                fs.unlink(`${appRoot}/${filePath}`, (error) => { //root_folder/upload/products.extenstion(png/jpg)
+                    if (error) {
+                        return next(CustomErrorHandler.serverError(error.message))
+                    }
+                }
+                )
                 return next(error)
             }
             res.status(201).json(document)
@@ -168,6 +175,7 @@ const workController = {
                         )
                     }
                     catch (error) {
+                        
                         return next(error)
                     }
                     res.status(201).json(document)
@@ -196,8 +204,9 @@ const workController = {
             if (err) {
                 return next(CustomErrorHandler.serverError())
             }
-            res.json(document)
+            
         })
+        res.json(document)
     }
 
 }

@@ -27,7 +27,7 @@ const certificateCategController = {
         let document
 
         try {
-            document = await CertificateCateg.findOneAndUpdate(
+            document = await CertificateCateg.findByIdAndUpdate(
                 {
                     _id: req.params.id
                 },
@@ -42,7 +42,7 @@ const certificateCategController = {
         } catch (error) {
             return next(error)
         }
-        return res.json(document)
+        res.json(document)
     },
 
     //Get Certificate Categ by id
@@ -89,7 +89,7 @@ const certificateCategController = {
             return next(new Error('Nothing to delete'))       
         }
 
-        return res.json(document)
+        res.json(document)
     }
 }
 
