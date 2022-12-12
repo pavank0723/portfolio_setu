@@ -1,17 +1,19 @@
-import { PortfolioCateg } from "../../models"
+import { SocialMedia } from "../../models"
 
-const portfolioCategController = {
+const socialMediaController = {
     //Create 
     async store(req, res, next) {
-        const { cat_id, name, description, isActive } = req.body
-        let document
 
+        const { link_id, title, description,icon,link, isActive } = req.body
+        let document
         try {
-            document = await PortfolioCateg.create(
+            document = await SocialMedia.create(
                 {
-                    cat_id,
-                    name,
+                    link_id,
+                    title,
                     description,
+                    icon,
+                    link,                    
                     isActive
                 }
             )
@@ -23,17 +25,19 @@ const portfolioCategController = {
 
     //Update
     async edit(req, res, next) {
-
-        const { name, description, isActive } = req.body
+        const { title, description,icon,link, isActive } = req.body
         let document
+
         try {
-            document = await PortfolioCateg.findOneAndUpdate(
+            document = await SocialMedia.findByIdAndUpdate(
                 {
                     _id: req.params.id
                 },
                 {
-                    name,
+                    title,
                     description,
+                    icon,
+                    link, 
                     isActive
                 },
                 { new: true }
@@ -42,16 +46,16 @@ const portfolioCategController = {
         } catch (error) {
             return next(error)
         }
-        res.status(201).json(document)
+        res.json(document)
     },
 
-    //Get category by id
-    async index(req, res, next) {
+    //Get Certificate Categ by id
+    async index(req,res,next){
         let document
         try {
-            document = await PortfolioCateg.findOne(
+            document = await SocialMedia.findOne(
                 {
-                    _id: req.params.id
+                    _id : req.params.id
                 }
             )
         } catch (error) {
@@ -62,13 +66,13 @@ const portfolioCategController = {
     },
 
     //Get All
-    async show(req, res, next) {
+    async show(req,res,next){
         let documents
 
         try {
-            documents = await PortfolioCateg.find().select('-updatedAt -__v').sort(
+            documents = await SocialMedia.find().select('-updatedAt -__v').sort(
                 {
-                    _id: -1
+                    _id:-1
                 }
             )
         } catch (error) {
@@ -79,18 +83,18 @@ const portfolioCategController = {
     },
 
     //Delete
-    async destroy(req, res, next) {
-        const document = await PortfolioCateg.findOneAndRemove(
+    async destroy(req,res,next) {
+        const document = await SocialMedia.findOneAndRemove(
             {
-                _id: req.params.id
+                _id:req.params.id
             }
         )
-        if (!document) {
-            return next(new Error('Nothing to delete'))
+        if(!document){
+            return next(new Error('Nothing to delete'))       
         }
 
         res.json(document)
     }
 }
 
-export default portfolioCategController
+export default socialMediaController

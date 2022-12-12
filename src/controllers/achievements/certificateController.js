@@ -81,7 +81,7 @@ const certificateController = {
     },
     
     //Read all work
-    async view(req, res, next) {
+    async show(req, res, next) {
         let documents
         try {
             documents = await Certificate.find().select('-updatedAt -__v').sort(
@@ -96,7 +96,7 @@ const certificateController = {
     },
 
     //Read work by ID
-    async show(req, res, next) {
+    async index(req, res, next) {
         let document
         try {
             document = await Certificate.findOne(

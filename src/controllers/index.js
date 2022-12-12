@@ -10,3 +10,9 @@ export { default as certificateController } from './achievements/certificateCont
 
 export { default as skillCategController } from './skill/categoryController'
 export { default as techSkillController } from './skill/techSkillController'
+
+export { default as aboutController } from './about/aboutController'
+
+export { default as infoCategoryController } from './about/infoCategoryController'
+
+export { default as socialMediaController } from './utils/socialMediaController'

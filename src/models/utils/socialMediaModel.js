@@ -2,21 +2,25 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
 
-const aboutInfoSchema = new Schema(
+const socialMediaSchema = new Schema(
     {
-        info_id:Number,
+        link_id:Number,
         title:{
             type:String,
             required:true,
             unique:true
         },
-        subtitle:{
+        description:{
             type:String,
             required:false
         },
         icon:{
             type:String,
             required:true
+        },
+        link:{
+            type:String,
+            required:false
         },
         isActive:{
             type:Boolean,
@@ -27,13 +31,13 @@ const aboutInfoSchema = new Schema(
     {timestamps:true}
 )
 
-aboutInfoSchema.pre("save", function(next){
+socialMediaSchema.pre("save", function(next){
     var docs = this;    
-    mongoose.model('AboutInfo', aboutInfoSchema).countDocuments(function(error, counter){
+    mongoose.model('SocialMedia', socialMediaSchema).countDocuments(function(error, counter){
         if(error) return next(error);
         docs.link_id = counter+1;
         next();
     });   
 });
 
-export default mongoose.model('AboutInfo',aboutInfoSchema)
+export default mongoose.model('SocialMedia',socialMediaSchema)

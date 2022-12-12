@@ -46,7 +46,7 @@ const certificateCategController = {
     },
 
     //Get Certificate Categ by id
-    async show(req,res,next){
+    async index(req,res,next){
         let document
         try {
             document = await CertificateCateg.findOne(
@@ -62,7 +62,7 @@ const certificateCategController = {
     },
 
     //Get All
-    async index(req,res,next){
+    async show(req,res,next){
         let documents
 
         try {

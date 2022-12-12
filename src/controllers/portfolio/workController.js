@@ -81,7 +81,7 @@ const workController = {
         )
     },
     //Read all work
-    async view(req, res, next) {
+    async show(req, res, next) {
         let documents
         try {
             documents = await Portfolio.find().select('-updatedAt -__v').sort(
@@ -96,7 +96,7 @@ const workController = {
     },
 
     //Read work by ID
-    async show(req, res, next) {
+    async index(req, res, next) {
         let document
         try {
             document = await Portfolio.findOne(

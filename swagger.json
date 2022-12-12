@@ -19,6 +19,10 @@
             "description": "All the autherization method"
         },
         {
+            "name": "About",
+            "description": "My Intro"
+        },
+        {
             "name": "Portfolio",
             "description": "Most recent works"
         },
@@ -49,7 +53,8 @@
         }
     },
     "consumes": [
-        "application/json"
+        "application/json",
+        "application/pdf"
     ],
     "produces": [
         "application/json"
@@ -1769,6 +1774,519 @@
                     "Skills"
                 ],
                 "summary": "Delete the particular skill by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/about/store":{
+            "post": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "Add detail in about",
+                "consumes": ["multipart/form-data","application/x-www-form-urlencoded","application/pdf"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "name": "doc",
+                        "in": "formData",
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/about/views": {
+            "get": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "View all about",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/about/view/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ],
+            "get": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "View the detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/about/edit/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of about that we want to find",
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "Update details of about",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "subtitle",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/about/destroy/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "Delete the particular about by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/info_category/store": {
+            "post": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "Add info category",
+                "parameters": [
+                    {
+                        "name": "obj",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SkillCategModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/info_category/views": {
+            "get": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "View all info category",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/info_category/view/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of skill category that we wantn to find"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "View the info category detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/info_category/edit/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of info category that we want to find",
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "Update details of info category",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "name": "subtitle",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "icon",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "isActive",
+                        "in": "formData",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully modified",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/info_category/destroy/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "Delete the particular info category by ID",
                 "responses": {
                     "200": {
                         "description": "Successfully deleted",

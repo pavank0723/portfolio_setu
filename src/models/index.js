@@ -10,3 +10,7 @@ export { default as Certificate } from './achievements/certificateModel'
 
 export { default as SkillCateg } from './skill/categoryModel'
 export { default as TechSkill } from './skill/techSkillModel'
+
+export { default as About } from './about/aboutModel'
+export { default as AboutInfo } from './about/infoModel'
+export { default as SocialMedia } from './utils/socialMediaModel'
