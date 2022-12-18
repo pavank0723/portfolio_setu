@@ -7,13 +7,15 @@ import path from 'path'
 
 import swaggerUi  from 'swagger-ui-express'
 import swaggerDocument from './swagger.json'
-
 // import multer from 'multer'
 
 import routes from './src/routes'
+import { swaggerCustomUI } from './public/css/customCss'
 
 // const upload = multer()
 const app = express()
+
+const {join} = path
 
 //📌Note: By default JSON in Express JS --==> ❎disable 
 app.use(express.json()) //✅ Enable
@@ -29,12 +31,19 @@ db.once('open', () => {
 })
 //#endregion
 
+// Static Files
+app.use(express.static('public'));
+
+// Example for other olders
+app.use('/css', express.static(__dirname + 'public/css'))
+
 //#region Swagger Setup
 var options = {
-    //customCss: '.swagger-ui .topbar {background-color: #3f6cff;}.swagger-ui .opblock.opblock-post .opblock-summary-method {background: #0255c1;}',
-    customSiteTitle: "Portfolio API | Welcome"
+    customCss: `${swaggerCustomUI}`,
+    customSiteTitle: "Portfolio API | Welcome",
+    customfavIcon: "../assets/portfolio_setu_icon.png"
 };
-
+// app.use(express.static(path.join(__dirname, './public/assets')));
 app.use('/api-docs',swaggerUi.serve, swaggerUi.setup(swaggerDocument,options))
 //#endregion
 
@@ -50,6 +59,8 @@ app.use(express.urlencoded({extended:false}))
 //📌Note: For view image globally
 // app.use('/uploads',express.static('/uploads'))
 app.use('/uploads',express.static('uploads'))
+
+// app.use('/swagger', express.static('./node_modules/swagger-ui-themes/themes/3.x/theme-feeling-blue.css'));
 
 //Routes
 app.use(routes)

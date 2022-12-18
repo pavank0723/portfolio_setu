@@ -34,7 +34,6 @@ const aboutSchema = new Schema(
                 ref:'AboutInfo'
             }    
         ]
-
     },
     { timestamps: true, toJSON: { getters: true }, id:false }
 )

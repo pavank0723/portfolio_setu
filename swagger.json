@@ -53,8 +53,7 @@
         }
     },
     "consumes": [
-        "application/json",
-        "application/pdf"
+        "application/json"
     ],
     "produces": [
         "application/json"
