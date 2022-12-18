@@ -36,4 +36,4 @@ aboutInfoSchema.pre("save", function(next){
     });   
 });
 
-export default mongoose.model('AboutInfo',aboutInfoSchema)
+export default mongoose.model('AboutInfo',aboutInfoSchema,'about_infos')

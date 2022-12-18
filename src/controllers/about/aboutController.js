@@ -9,7 +9,7 @@ const storage = multer.diskStorage(
     {
         destination: (req, file, cb) => cb(null, "uploads/utils/"),
         filename: (req, file, cb) => {
-            const uniqueName = `pavan's_resume${Date.now()}}${path.extname(file.originalname)}`
+            const uniqueName = `pavan's_resume-${Date.now()}${path.extname(file.originalname)}`
             cb(null, uniqueName)
         }
     }
@@ -36,15 +36,15 @@ const aboutController = {
             }
             // console.log(req.body)
 
-            const filePath = req.doc.path.replace(/\\/g, "/")
+            const filePath = req.file.path.replace(/\\/g, "/")
 
             // var newFilePath = filePath.split('\\').join('/')
             console.log('==>>>>>>>', filePath)
 
             //Validation from productValidator
-            const aboutValidator = aboutSchema.validate(req.body)
+
             //==--->> 2. Joi Validate if error
-            const { error } = aboutValidator
+            const { error } = aboutSchema.validate(req.body)
             if (error) {
                 //Delete the uploaded file when validation failed
                 fs.unlink(`${appRoot}/${filePath}`, (err) => { //root_folder/upload/products.extenstion(png/jpg)
@@ -55,14 +55,15 @@ const aboutController = {
                 )
                 return next(error)
             }
-            const { title, demo } = req.body
+            const { name, description,isActive } = req.body
             let document
 
             try {
                 document = await About.create(
                     {
-                        title,
-                        demo,
+                        name,
+                        description,
+                        isActive,
                         doc: filePath
                     }
                 )
@@ -124,10 +125,10 @@ const aboutController = {
             console.log("===>>>>>>", filePath)
 
             //Validation
-            const aboutValidator = aboutSchema.validate(req.body)
+            const portfolioValidator = aboutSchema.validate(req.body)
 
             //Joi Validate 
-            const { error } = aboutValidator
+            const { error } = portfolioValidator
 
             if (error) {
                 //Delete file when validation failed
@@ -149,14 +150,14 @@ const aboutController = {
                 return next(new Error('Nothing to delete'))
             }
 
-            const imagePath = imageRemove._doc.image
+            const imagePath = imageRemove._doc.doc
             fs.unlink(`${appRoot}/${imagePath}`, async (err) => {
                 if (err) {
                     return next(CustomErrorHandler.serverError())
                 }
                 else {
                     //Update part
-                    const { title, demo } = req.body
+                    const { name, description,isActive } = req.body
                     let document
 
                     try {
@@ -165,8 +166,9 @@ const aboutController = {
                                 _id: req.params.id
                             },
                             {
-                                title,
-                                demo,
+                                name,
+                                description,
+                                isActive,
                                 ...(req.file && { doc: filePath })
                             },
                             {
@@ -197,8 +199,8 @@ const aboutController = {
             return next(new Error('Nothing to delete'))
         }
 
-        //image delete from local
-        const imagePath = document._doc.image //without getter
+        //doc delete from local
+        const imagePath = document._doc.doc //without getter
 
         fs.unlink(`${appRoot}/${imagePath}`, (err) => {
             if (err) {

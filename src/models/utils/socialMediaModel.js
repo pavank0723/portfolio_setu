@@ -40,4 +40,4 @@ socialMediaSchema.pre("save", function(next){
     });   
 });
 
-export default mongoose.model('SocialMedia',socialMediaSchema)
+export default mongoose.model('SocialMedia',socialMediaSchema,'social_medias')

@@ -1,5 +1,5 @@
-import { boolean } from "joi";
 import mongoose from "mongoose";
+import { APP_URL } from "../../config";
 
 const Schema = mongoose.Schema
 
@@ -13,15 +13,6 @@ const aboutSchema = new Schema(
         description:{
             type:String,
             required:false
-        },
-        doc:{
-            type:String,
-            required:false,
-            get: (doc) => {
-                //https://localhost:5100/uploads/portfolio/1669882893223-409215745.png
-                //----Domain name-------/-----------Already have---------------------
-                return `${APP_URL}/${doc}`
-            }
         },
         social_link:[
             {
@@ -39,9 +30,18 @@ const aboutSchema = new Schema(
             type:Boolean,
             default:true,
             required:false
-        }
+        },
+        doc:{
+            type:String,
+            required:true,
+            get: (doc) => {
+                //https://localhost:5100/uploads/portfolio/1669882893223-409215745.png
+                //----Domain name-------/-----------Already have---------------------
+                return `${APP_URL}/${doc}`
+            }
+        },
     },
     { timestamps: true, toJSON: { getters: true }, id:false }
 )
 
-export default mongoose.model('About',aboutSchema)
+export default mongoose.model('About',aboutSchema,'abouts')

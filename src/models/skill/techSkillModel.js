@@ -26,4 +26,4 @@ const techSkillSchema = new Schema(
     },{ timestamps: true, toJSON: { getters: true }, id:false }
 )
 
-export default mongoose.model('TechSkill',techSkillSchema)
+export default mongoose.model('TechSkill',techSkillSchema,'tech_skills')

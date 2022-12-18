@@ -7,15 +7,12 @@ import path from 'path'
 
 import swaggerUi  from 'swagger-ui-express'
 import swaggerDocument from './swagger.json'
-// import multer from 'multer'
 
 import routes from './src/routes'
 import { swaggerCustomUI } from './public/css/customCss'
 
 // const upload = multer()
 const app = express()
-
-const {join} = path
 
 //📌Note: By default JSON in Express JS --==> ❎disable 
 app.use(express.json()) //✅ Enable
@@ -57,10 +54,7 @@ app.use(express.urlencoded({extended:false}))
 
 
 //📌Note: For view image globally
-// app.use('/uploads',express.static('/uploads'))
 app.use('/uploads',express.static('uploads'))
-
-// app.use('/swagger', express.static('./node_modules/swagger-ui-themes/themes/3.x/theme-feeling-blue.css'));
 
 //Routes
 app.use(routes)
