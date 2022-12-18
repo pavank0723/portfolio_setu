@@ -40,7 +40,7 @@ app.use('/css', express.static(__dirname + 'public/css'))
 //#region Swagger Setup
 var options = {
     customCss: `${swaggerCustomUI}`,
-    customSiteTitle: "Portfolio API | Welcome",
+    customSiteTitle: "Portfolio Setu API | Welcome",
     customfavIcon: "../assets/portfolio_setu_icon.png"
 };
 // app.use(express.static(path.join(__dirname, './public/assets')));
