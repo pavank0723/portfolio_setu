@@ -15,4 +15,8 @@ export { default as aboutController } from './about/aboutController'
 
 export { default as infoCategoryController } from './about/infoCategoryController'
 
+export { default as qualificationCategController } from './qualification/categoryController'
+
+export { default as experienceController } from './qualification/experienceController'
+
 export { default as socialMediaController } from './utils/socialMediaController'

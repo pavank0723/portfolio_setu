@@ -11,6 +11,8 @@ import skillCategoryRouter from "./skill/skillCategory"
 import aboutRouter from "./about/self_info"
 import infoRouter from "./about/info_category"
 import socialRouter from "./utils/social_media"
+import qualificationCategoryRouter from "./qualification/qualificationCategory"
+import experienceRouter from "./qualification/experience"
 
 const router = express()
 
@@ -23,7 +25,9 @@ router.use('/skill/', skillRouter)
 router.use('/skill_category/', skillCategoryRouter)
 router.use('/about/', aboutRouter)
 router.use('/info_category/', infoRouter)
-router.use('/utils/', socialRouter)
+router.use('/qualification_category/', qualificationCategoryRouter)
+router.use('/experience/', experienceRouter)
+router.use('/social_media/', socialRouter)
 
 
 export default router

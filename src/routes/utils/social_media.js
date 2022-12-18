@@ -4,10 +4,10 @@ import { admin, auth } from "../../middlewares";
 
 var route = express.Router();
 
-route.post('/store',socialMediaController.store)
+route.post('/store',[auth,admin],socialMediaController.store)
 route.get('/views',socialMediaController.show)
 route.get('/view/:id',socialMediaController.index)
-route.put('/edit/:id',socialMediaController.edit)
-route.delete('/destroy/:id',socialMediaController.destroy)
+route.put('/edit/:id',[auth,admin],socialMediaController.edit)
+route.delete('/destroy/:id',[auth,admin],socialMediaController.destroy)
 
 export default route

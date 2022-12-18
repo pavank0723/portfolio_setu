@@ -37,6 +37,10 @@
         {
             "name": "Qualification",
             "description": "My personal journey"
+        },
+        {
+            "name": "Utils",
+            "description": "Others info"
         }
     ],
     "schemes": [
@@ -879,8 +883,7 @@
                 {
                     "name": "id",
                     "in": "path",
-                    "required": true,
-                    "description": "ID of certificate category that we wantn to find"
+                    "required": true
                 }
             ],
             "get": {
@@ -922,7 +925,6 @@
                     "name": "id",
                     "in": "path",
                     "required": true,
-                    "description": "ID of portfolio category that we want to find",
                     "type": "string"
                 }
             ],
@@ -1388,7 +1390,7 @@
                     "name": "id",
                     "in": "path",
                     "required": true,
-                    "description": "ID of skill category that we wantn to find"
+                    "description": "ID of skill category that we want to find"
                 }
             ],
             "get": {
@@ -1962,11 +1964,12 @@
                 "consumes": ["application/x-www-form-urlencoded"],
                 "parameters": [
                     {
-                        "name": "title",
-                        "in": "formData"
+                        "name": "name",
+                        "in": "formData",
+                        "required": false
                     },
                     {
-                        "name": "subtitle",
+                        "name": "description",
                         "in": "formData",
                         "required": false
                     },
@@ -2158,7 +2161,7 @@
                     "name": "id",
                     "in": "path",
                     "required": true,
-                    "description": "ID of skill category that we wantn to find"
+                    "description": "ID of skill category that we want to find"
                 }
             ],
             "get": {
@@ -2200,7 +2203,6 @@
                     "name": "id",
                     "in": "path",
                     "required": true,
-                    "description": "ID of info category that we want to find",
                     "type": "string"
                 }
             ],
@@ -2212,12 +2214,12 @@
                 "consumes": ["application/x-www-form-urlencoded"],
                 "parameters": [
                     {
-                        "name": "title",
+                        "name": "name",
                         "in": "formData",
-                        "required": true
+                        "required": false
                     },
                     {
-                        "name": "subtitle",
+                        "name": "description",
                         "in": "formData",
                         "required": false
                     },
@@ -2286,6 +2288,778 @@
                     "About"
                 ],
                 "summary": "Delete the particular info category by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/social_media/store": {
+            "post": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "Add socia media",
+                "parameters": [
+                    {
+                        "name": "obj",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SocialMediaModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/social_media/views": {
+            "get": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "View all my social media detail",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/social_media/view/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true                    
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "View the social media detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/social_media/edit/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "Update details of social media",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "icon",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "link",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "isActive",
+                        "in": "formData",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully modified",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/social_media/destroy/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "Delete the particular social media by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/qualification_category/store": {
+            "post": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "Add qualification category",
+                "parameters": [
+                    {
+                        "name": "obj",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/QualificationCategoryModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/qualification_category/views": {
+            "get": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "View all qualification category",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/qualification_category/view/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "View the qualification category detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/qualification_category/edit/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "Update details of qualification category",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "icon",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "isActive",
+                        "in": "formData",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully modified",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/qualification_category/destroy/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "Delete the particular qualification category by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/experience/store": {
+            "post": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "Add experience",
+                "parameters": [
+                    {
+                        "name": "obj",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ExperienceModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/experience/views": {
+            "get": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "View all experience",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/experience/view/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "View the experience detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/experience/edit/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "Update details of experience",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "subtitle",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "start_year",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "end_year",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "isActive",
+                        "in": "formData",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully modified",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/experience/destroy/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "Delete the particular experience by ID",
                 "responses": {
                     "200": {
                         "description": "Successfully deleted",
@@ -2432,6 +3206,89 @@
                 "description": {
                     "type": "string",
                     "example": "This is skill category 0 description"
+                },
+                "icon": {
+                    "type": "string",
+                    "example": "uil-brackets-curly"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "example": true
+                }
+            },
+            "required": [
+                "name",
+                "icon"
+            ]
+        },
+        "SocialMediaModel": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "example": "skill category 0"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "This is skill category 0 description"
+                },
+                "icon": {
+                    "type": "string",
+                    "example": "uil-brackets-curly"
+                },
+                "link": {
+                    "type": "string",
+                    "example": "#"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "example": true
+                }
+            },
+            "required": [
+                "name",
+                "icon"
+            ]
+        },
+        "ExperienceModel": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "example": "Qualification 0"
+                },
+                "subtitle": {
+                    "type": "string",
+                    "example": "This is Qualification 0 description"
+                },
+                "start_year": {
+                    "type": "string",
+                    "example": "uil-brackets-curly"
+                },
+                "end_year": {
+                    "type": "string",
+                    "example": "uil-brackets-curly"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "example": true
+                }
+            },
+            "required": [
+                "name",
+                "icon"
+            ]
+        },
+        "QualificationCategoryModel": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Qualification category 0"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "This is Qualification category 0 description"
                 },
                 "icon": {
                     "type": "string",

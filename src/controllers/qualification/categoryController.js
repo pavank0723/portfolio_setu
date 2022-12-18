@@ -1,19 +1,18 @@
-import { SocialMedia } from "../../models"
+import { QualificationCateg } from "../../models"
 
-const socialMediaController = {
+const qualificationCategController = {
     //Create 
     async store(req, res, next) {
-
-        const { link_id, title, description,icon,link, isActive } = req.body
+        const { cat_id, name, description,icon, isActive } = req.body
         let document
+
         try {
-            document = await SocialMedia.create(
+            document = await QualificationCateg.create(
                 {
-                    link_id,
-                    title,
+                    cat_id,
+                    name,
                     description,
                     icon,
-                    link,                    
                     isActive
                 }
             )
@@ -25,19 +24,18 @@ const socialMediaController = {
 
     //Update
     async edit(req, res, next) {
-        const { title, description,icon,link, isActive } = req.body
-        let document
 
+        const { name, description,icon, isActive } = req.body
+        let document
         try {
-            document = await SocialMedia.findByIdAndUpdate(
+            document = await QualificationCateg.findByIdAndUpdate(
                 {
                     _id: req.params.id
                 },
                 {
-                    title,
+                    name,
                     description,
                     icon,
-                    link, 
                     isActive
                 },
                 { new: true }
@@ -49,13 +47,13 @@ const socialMediaController = {
         res.status(201).json(document)
     },
 
-    //Get Certificate Categ by id
-    async index(req,res,next){
+    //Get category by id
+    async index(req, res, next) {
         let document
         try {
-            document = await SocialMedia.findOne(
+            document = await QualificationCateg.findOne(
                 {
-                    _id : req.params.id
+                    _id: req.params.id
                 }
             )
         } catch (error) {
@@ -66,13 +64,13 @@ const socialMediaController = {
     },
 
     //Get All
-    async show(req,res,next){
+    async show(req, res, next) {
         let documents
 
         try {
-            documents = await SocialMedia.find().select('-updatedAt -__v').sort(
+            documents = await QualificationCateg.find().select('-updatedAt -__v').sort(
                 {
-                    _id:-1
+                    _id: -1
                 }
             )
         } catch (error) {
@@ -83,18 +81,18 @@ const socialMediaController = {
     },
 
     //Delete
-    async destroy(req,res,next) {
-        const document = await SocialMedia.findOneAndRemove(
+    async destroy(req, res, next) {
+        const document = await QualificationCateg.findOneAndRemove(
             {
-                _id:req.params.id
+                _id: req.params.id
             }
         )
-        if(!document){
-            return next(new Error('Nothing to delete'))       
+        if (!document) {
+            return next(new Error('Nothing to delete'))
         }
 
         res.json(document)
     }
 }
 
-export default socialMediaController
+export default qualificationCategController
