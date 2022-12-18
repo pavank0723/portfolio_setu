@@ -2084,7 +2084,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/SkillCategModel"
+                            "$ref": "#/definitions/InfoCategoryModel"
                         }
                     }
                 ],
@@ -2160,8 +2160,7 @@
                 {
                     "name": "id",
                     "in": "path",
-                    "required": true,
-                    "description": "ID of skill category that we want to find"
+                    "required": true
                 }
             ],
             "get": {
@@ -2214,12 +2213,12 @@
                 "consumes": ["application/x-www-form-urlencoded"],
                 "parameters": [
                     {
-                        "name": "name",
+                        "name": "title",
                         "in": "formData",
                         "required": false
                     },
                     {
-                        "name": "description",
+                        "name": "subtitle",
                         "in": "formData",
                         "required": false
                     },
@@ -3276,6 +3275,31 @@
             },
             "required": [
                 "name",
+                "icon"
+            ]
+        },
+        "InfoCategoryModel": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "example": "Qualification 0"
+                },
+                "subtitle": {
+                    "type": "string",
+                    "example": "This is Qualification 0 description"
+                },
+                "icon": {
+                    "type": "string",
+                    "example": "uil-brackets-curly"
+                },
+                "isActive": {
+                    "type": "boolean",
+                    "example": true
+                }
+            },
+            "required": [
+                "title",
                 "icon"
             ]
         },

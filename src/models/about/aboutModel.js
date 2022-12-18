@@ -1,3 +1,4 @@
+import { boolean } from "joi";
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema
@@ -28,12 +29,17 @@ const aboutSchema = new Schema(
                 ref:'SocialMedia'
             }    
         ],
-        inof_category:[
+        info_category:[
             {
                 type:'ObjectId',
                 ref:'AboutInfo'
             }    
-        ]
+        ],
+        isActive:{
+            type:Boolean,
+            default:true,
+            required:false
+        }
     },
     { timestamps: true, toJSON: { getters: true }, id:false }
 )
