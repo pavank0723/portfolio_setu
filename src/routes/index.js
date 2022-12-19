@@ -16,6 +16,9 @@ import experienceRouter from "./qualification/experience"
 
 import testimonialRouter from "./utils/testimonial"
 
+import serviceRouter from "./utils/service"
+import serviceInfoRouter from "./utils/service_info"
+
 const router = express()
 
 router.use('/auth/', authRouter)
@@ -31,6 +34,7 @@ router.use('/qualification_category/', qualificationCategoryRouter)
 router.use('/experience/', experienceRouter)
 router.use('/social_media/', socialRouter)
 router.use('/testimonial/', testimonialRouter)
-
+router.use('/service/', serviceRouter)
+router.use('/service_info/', serviceInfoRouter)
 
 export default router

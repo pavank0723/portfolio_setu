@@ -22,3 +22,7 @@ export { default as experienceController } from './qualification/experienceContr
 export { default as socialMediaController } from './utils/socialMediaController'
 
 export { default as testimonialController } from './utils/testimonialController'
+
+export { default as serviceController } from './utils/serviceController'
+
+export { default as serviceInfoController } from './utils/serviceInfoController'
