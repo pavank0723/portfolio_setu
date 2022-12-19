@@ -1840,7 +1840,8 @@
                     {
                         "name": "isActive",
                         "in": "formData",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default":false
                     }
                 ],
                 "responses": {
@@ -1987,7 +1988,8 @@
                     {
                         "name": "isActive",
                         "in": "formData",
-                        "type": "boolean"
+                        "type": "boolean",
+                        "default":false
                     }
                 ],
                 "responses": {
@@ -3069,6 +3071,280 @@
                     "Qualification"
                 ],
                 "summary": "Delete the particular experience by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/testimonial/store":{
+            "post": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "Add testimonial",
+                "consumes": ["multipart/form-data","application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "name": "comment",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "type": "file"
+                    },
+                    {
+                        "name": "rating",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "isActive",
+                        "in": "formData",
+                        "default":false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/testimonial/views": {
+            "get": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "View all testimonials",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/testimonial/view/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "View the testimonial detail by ID",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                }
+            }
+        },
+        "/testimonial/edit/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of testimonial that we want to find",
+                    "type": "string"
+                }
+            ],
+            "put": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "Update details of portfolio",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "comment",
+                        "in": "formData",
+                        "required": false
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "required": false,
+                        "type": "file"
+                    },
+                    {
+                        "name": "rating",
+                        "in": "formData"
+                    },
+                    {
+                        "name": "isActive",
+                        "in": "formData",
+                        "default":false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/testimonial/destroy/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Utils"
+                ],
+                "summary": "Delete the particular testimonial by ID",
                 "responses": {
                     "200": {
                         "description": "Successfully deleted",

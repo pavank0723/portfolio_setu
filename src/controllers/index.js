@@ -20,3 +20,5 @@ export { default as qualificationCategController } from './qualification/categor
 export { default as experienceController } from './qualification/experienceController'
 
 export { default as socialMediaController } from './utils/socialMediaController'
+
+export { default as testimonialController } from './utils/testimonialController'

@@ -15,6 +15,11 @@ export { default as About } from './about/aboutModel'
 export { default as AboutInfo } from './about/infoModel'
 
 export { default as QualificationCateg } from './qualification/categoryModel'
-export { default as Experience} from './qualification/experienceModel'
+export { default as Experience } from './qualification/experienceModel'
 
 export { default as SocialMedia } from './utils/socialMediaModel'
+export { default as Testimonial } from './utils/testimonialModel'
+
+export { default as ServiceInfo } from './utils/serviceInfoModel'
+
+export { default as Service } from './utils/serviceModel'
