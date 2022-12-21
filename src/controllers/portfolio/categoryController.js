@@ -45,6 +45,30 @@ const portfolioCategController = {
         res.status(201).json(document)
     },
 
+    //Update in work by ID
+    async edit_work(req, res, next) {
+
+        const { workId } = req.body
+        let document
+        try {
+            document = await PortfolioCateg.findOneAndUpdate(
+                {
+                    _id: req.params.id
+                },
+                {
+                    $push:{
+                        works:workId
+                    }
+                },
+                { new: true }
+            )
+            console.log(document)
+        } catch (error) {
+            return next(error)
+        }
+        res.status(201).json(document)
+    },
+
     //Get category by id
     async index(req, res, next) {
         let document
@@ -66,7 +90,7 @@ const portfolioCategController = {
         let documents
 
         try {
-            documents = await PortfolioCateg.find().select('-updatedAt -__v').sort(
+            documents = await PortfolioCateg.find({}).populate('portfolios').select('-updatedAt -__v').sort(
                 {
                     _id: -1
                 }

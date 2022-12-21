@@ -26,4 +26,4 @@ const portfolioSchema = new Schema(
     },{ timestamps: true, toJSON: { getters: true }, id:false }
 )
 
-export default mongoose.model('Portfolio',portfolioSchema)
+export default mongoose.model('Portfolio',portfolioSchema,'portfolios')
