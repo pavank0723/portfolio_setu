@@ -90,7 +90,10 @@ const portfolioCategController = {
         let documents
 
         try {
-            documents = await PortfolioCateg.find({}).populate('portfolios').select('-updatedAt -__v').sort(
+            documents = await PortfolioCateg.find().populate({
+                path: 'works', //Come from model i.e. works(Object)
+                select:'_id title demo image',
+            }).select('-updatedAt -__v').sort(
                 {
                     _id: -1
                 }
