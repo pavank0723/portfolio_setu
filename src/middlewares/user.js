@@ -1,0 +1,26 @@
+import { User } from "../models"
+import CustomErrorHandler from "../services/CustomErrorHandler"
+
+
+const user = async (req, res, next) => {
+    try {
+        //Get from the collection
+        const user = await User.findOne(
+            {
+                _id: req.user._id
+            }
+        )
+
+        //Check
+        if (user.role === 'user') {
+            next()
+        } else {
+            return next(CustomErrorHandler.unAuthorized())
+        }
+
+    } catch (error) {
+        return next(CustomErrorHandler.serverError())
+    }
+}
+
+export default user

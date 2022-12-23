@@ -85,7 +85,13 @@ const aboutController = {
     async show(req, res, next) {
         let documents
         try {
-            documents = await About.find().select('-updatedAt -__v').sort(
+            documents = await About.find().populate({
+                path:'social_link',
+                select:'_id title icon link isActive'
+            }).populate({
+                path:'info_category',
+                select:'_id title subtitle icon isActive'
+            }).select('-updatedAt -__v').sort(
                 {
                     _id: -1
                 }
@@ -186,6 +192,54 @@ const aboutController = {
 
 
         })
+    },
+
+    //Update in social media link by ID
+    async edit_social_link(req, res, next) {
+
+        const { socialId } = req.body
+        let document
+        try {
+            document = await About.findOneAndUpdate(
+                {
+                    _id: req.params.id
+                },
+                {
+                    $push:{
+                        social_link:socialId
+                    }
+                },
+                { new: true }
+            )
+            console.log(document)
+        } catch (error) {
+            return next(error)
+        }
+        res.status(201).json(document)
+    },
+
+    //Update in about info category by ID
+    async edit_info_category(req, res, next) {
+
+        const { infoCategId } = req.body
+        let document
+        try {
+            document = await About.findOneAndUpdate(
+                {
+                    _id: req.params.id
+                },
+                {
+                    $push:{
+                        info_category:infoCategId
+                    }
+                },
+                { new: true }
+            )
+            console.log(document)
+        } catch (error) {
+            return next(error)
+        }
+        res.status(201).json(document)
     },
 
     //Delete
