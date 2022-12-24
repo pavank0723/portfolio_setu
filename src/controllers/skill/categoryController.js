@@ -27,7 +27,12 @@ const skillCategController = {
         let documents
 
         try {
-            documents = await SkillCateg.find().select('-updatedAt -__v').sort(
+            documents = await SkillCateg.find().populate(
+                {
+                    path:'skills',
+                    select:'_id title subtitle image'
+                }
+            ).select('-updatedAt -__v').sort(
                 {
                     _id: -1
                 }
@@ -72,6 +77,29 @@ const skillCategController = {
                     isActive
                 },
                 { new: true }
+            )
+            console.log(document)
+        } catch (error) {
+            return next(error)
+        }
+        res.status(201).json(document)
+    },
+
+    async add_skill(req,res,next){
+        const {skillId} = req.body
+        let document 
+        try {
+            document = await SkillCateg.findOneAndUpdate(
+                {
+                    _id:req.params.id
+                },
+                {
+                    $push:{
+                        skills:skillId
+                    },
+
+                },
+                {new:true}
             )
             console.log(document)
         } catch (error) {

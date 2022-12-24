@@ -55,7 +55,7 @@ const aboutController = {
                 )
                 return next(error)
             }
-            const { name, description,isActive } = req.body
+            const { name, description, isActive } = req.body
             let document
 
             try {
@@ -85,13 +85,18 @@ const aboutController = {
     async show(req, res, next) {
         let documents
         try {
-            documents = await About.find().populate({
-                path:'social_link',
-                select:'_id title icon link isActive'
-            }).populate({
-                path:'info_category',
-                select:'_id title subtitle icon isActive'
-            }).select('-updatedAt -__v').sort(
+            documents = await About.find().populate(
+                [
+                    {
+                        path: 'social_link',
+                        select: '_id title icon link isActive'
+                    },
+                    {
+                        path: 'info_category',
+                        select: '_id title subtitle icon isActive'
+                    }
+                ]
+            ).select('-updatedAt -__v').sort(
                 {
                     _id: -1
                 }
@@ -163,7 +168,7 @@ const aboutController = {
                 }
                 else {
                     //Update part
-                    const { name, description,isActive } = req.body
+                    const { name, description, isActive } = req.body
                     let document
 
                     try {
@@ -183,7 +188,7 @@ const aboutController = {
                         )
                     }
                     catch (error) {
-                        
+
                         return next(error)
                     }
                     res.status(201).json(document)
@@ -205,8 +210,8 @@ const aboutController = {
                     _id: req.params.id
                 },
                 {
-                    $push:{
-                        social_link:socialId
+                    $push: {
+                        social_link: socialId
                     }
                 },
                 { new: true }
@@ -229,8 +234,8 @@ const aboutController = {
                     _id: req.params.id
                 },
                 {
-                    $push:{
-                        info_category:infoCategId
+                    $push: {
+                        info_category: infoCategId
                     }
                 },
                 { new: true }
@@ -260,7 +265,7 @@ const aboutController = {
             if (err) {
                 return next(CustomErrorHandler.serverError())
             }
-            
+
         })
         res.json(document)
     }

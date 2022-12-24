@@ -3,13 +3,12 @@ import { QualificationCateg } from "../../models"
 const qualificationCategController = {
     //Create 
     async store(req, res, next) {
-        const { cat_id, name, description,icon, isActive } = req.body
+        const { name, description,icon, isActive } = req.body
         let document
 
         try {
             document = await QualificationCateg.create(
                 {
-                    cat_id,
                     name,
                     description,
                     icon,
@@ -47,6 +46,27 @@ const qualificationCategController = {
         res.status(201).json(document)
     },
 
+    async add_experience(req,res,next){
+        const {experienceId} = req.body
+        let document
+        try {
+            document = await QualificationCateg.findOneAndUpdate(
+                {
+                    _id:req.params.id
+                },
+                {
+                    $push:{
+                        qualification:experienceId
+                    }
+                },
+                {new:true}
+            )
+            
+        } catch (error) {
+            return next(error)
+        }
+        res.status(201).json(document)
+    },
     //Get category by id
     async index(req, res, next) {
         let document
@@ -68,7 +88,12 @@ const qualificationCategController = {
         let documents
 
         try {
-            documents = await QualificationCateg.find().select('-updatedAt -__v').sort(
+            documents = await QualificationCateg.find().populate(
+                {
+                    path:'qualification',
+                    select:'_id title subtitle start_year end_year isActive'
+                }
+            ).select('-updatedAt -__v').sort(
                 {
                     _id: -1
                 }

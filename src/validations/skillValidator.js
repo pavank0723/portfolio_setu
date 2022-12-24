@@ -10,8 +10,8 @@ export const skillCategorySchema = Joi.object(
 
 export const skillSchema = Joi.object(
     {
-        title :Joi.string().required(),
-        subtitle:Joi.string().required(),
+        title :Joi.string(),
+        subtitle:Joi.string(),
         image:Joi.string(),
     }
 )

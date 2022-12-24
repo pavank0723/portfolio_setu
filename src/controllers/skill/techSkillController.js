@@ -1,9 +1,9 @@
+import path from "path"
+import multer from "multer"
 import { TechSkill } from "../../models"
 import CustomErrorHandler from "../../services/CustomErrorHandler"
 import fs from "fs"
 import { skillSchema } from "../../validations/skillValidator"
-import path from "path"
-import multer from "multer"
 
 const storage = multer.diskStorage(
     {
@@ -32,13 +32,11 @@ const techSkillController = {
         handleMultipartData(req, res, async (err) => {
             if (err) {
                 return next(CustomErrorHandler.serverError(err.message))
-            } 
-            // console.log(req.body)
-            const filePath = req.file.path.replace(/\\/g,"/")
+            }
 
-            // var newFilePath = filePath.split('\\').join('/')
+            const filePath = !req.file == undefined ? req.file.path.replace(/\\/g, "/") : 'null'
+
             console.log('==>>>>>>>', filePath)
-
 
             //Validation from productValidator
 
@@ -118,9 +116,10 @@ const techSkillController = {
             }
 
             let filePath
-            if (req.file) {
-                filePath = req.file.path.replace(/\\/g, "/")
-            }
+            // if (req.file) {
+            //     filePath = req.file.path.replace(/\\/g, "/")
+            // }
+            filePath = !req.file == undefined ? req.file.path.replace(/\\/g, "/") : 'null'
             console.log("===>>>>>>", filePath)
 
             //Validation
@@ -134,6 +133,7 @@ const techSkillController = {
                 if (req.file) {
                     fs.unlink(`${appRoot}/${filePath}`, (err) => {
                         if (err) {
+                            console.log("Cutome 1 ", CustomErrorHandler.serverError(err.message))
                             return next(CustomErrorHandler.serverError(err.message))
                         }
                     })
@@ -146,40 +146,75 @@ const techSkillController = {
                 }
             )
             if (!imageRemove) {
+                console.log("Cutome 4 Remove ", CustomErrorHandler.serverError(err.message))
                 return next(new Error('Nothing to delete'))
             }
 
             const imagePath = imageRemove._doc.image
-            fs.unlink(`${appRoot}/${imagePath}`, async (err) => {
-                if (err) {
-                    return next(CustomErrorHandler.serverError())
-                }
-                else {
-                    //Update part
-                    const { title, subtitle } = req.body
-                    let document
+            console.log("Image Path  ====>>>> ", imagePath)
+            if (!imagePath == null) {
+                
+                fs.unlink(`${appRoot}/${imagePath}`, async (err) => {
+                    if (err) {
+                        console.log("Cutome 2 ", CustomErrorHandler.serverError(err.message))
+                        return next(CustomErrorHandler.serverError())
+                    }
+                    else {
+                        //Update part
+                        const { title, subtitle } = req.body
+                        let document
 
-                    try {
-                        document = await TechSkill.findOneAndUpdate(
-                            {
-                                _id: req.params.id
-                            },
-                            {
-                                title,
-                                subtitle,
-                                ...(req.file && { image: filePath })
-                            },
-                            {
-                                new: true
-                            }
-                        )
+                        try {
+                            document = await TechSkill.findOneAndUpdate(
+                                {
+                                    _id: req.params.id
+                                },
+                                {
+                                    title,
+                                    subtitle,
+                                    ...(req.file && { image: filePath })
+                                },
+                                {
+                                    new: true
+                                }
+                            )
+                        }
+                        catch (error) {
+                            console.log("Cutome 3 ", CustomErrorHandler.serverError(err.message))
+                            return next(error)
+                        }
+                        res.status(201).json(document)
                     }
-                    catch (error) {
-                        return next(error)
-                    }
-                    res.status(201).json(document)
+                })
+
+            } else {
+
+                //Update part
+                const { title, subtitle } = req.body
+                let document
+
+                try {
+                    document = await TechSkill.findOneAndUpdate(
+                        {
+                            _id: req.params.id
+                        },
+                        {
+                            title,
+                            subtitle,
+                            ...(req.file && { image: filePath })
+                        },
+                        {
+                            new: true
+                        }
+                    )
                 }
-            })
+                catch (error) {
+                    console.log("Cutome 3 ", CustomErrorHandler.serverError(err.message))
+                    return next(error)
+                }
+                res.status(201).json(document)
+            }
+
 
 
         })

@@ -8,11 +8,11 @@ const techSkillSchema = new Schema(
         title:{
             type:String,
             unique:true,
-            required:true
+            required:false
         },
         subtitle:{
             type:String,
-            required:true
+            required:false
         },
         image:{
             type:String,

@@ -14,6 +14,12 @@ const skillCategSchema = new Schema(
             type:String,
             required:false
         },
+        skills:[
+            {
+                type:'ObjectId',
+                ref:'TechSkill'
+            }
+        ],
         icon:{
             type:String,
             required:true
