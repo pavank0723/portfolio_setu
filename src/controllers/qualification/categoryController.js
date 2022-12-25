@@ -3,7 +3,7 @@ import { QualificationCateg } from "../../models"
 const qualificationCategController = {
     //Create 
     async store(req, res, next) {
-        const { name, description,icon, isActive } = req.body
+        const { name, description, icon, isActive } = req.body
         let document
 
         try {
@@ -24,7 +24,7 @@ const qualificationCategController = {
     //Update
     async edit(req, res, next) {
 
-        const { name, description,icon, isActive } = req.body
+        const { name, description, icon, isActive } = req.body
         let document
         try {
             document = await QualificationCateg.findByIdAndUpdate(
@@ -45,28 +45,55 @@ const qualificationCategController = {
         }
         res.status(201).json(document)
     },
-
-    async add_experience(req,res,next){
-        const {experienceId} = req.body
+    
+    //Add Experience
+    async add_experience(req, res, next) {
+        const { experienceId } = req.body
         let document
         try {
             document = await QualificationCateg.findOneAndUpdate(
                 {
-                    _id:req.params.id
+                    _id: req.params.id
                 },
                 {
-                    $push:{
-                        qualification:experienceId
+                    $push: {
+                        qualification: experienceId
                     }
                 },
-                {new:true}
+                { new: true }
             )
-            
+
         } catch (error) {
             return next(error)
         }
         res.status(201).json(document)
     },
+
+    //Remove Experience
+    async remove_experience(req, res, next) {
+        const { experienceId } = req.body
+
+        let document
+        try {
+            document = await QualificationCateg.findOneAndUpdate(
+                {
+                    _id: req.params.id
+                },
+                {
+                    $pull: {
+                        qualification: experienceId
+                    }
+                },
+                { new: true }
+
+            )
+
+        } catch (error) {
+            return next(error)
+        }
+        res.status(201).json(document)
+    },
+
     //Get category by id
     async index(req, res, next) {
         let document
@@ -90,8 +117,8 @@ const qualificationCategController = {
         try {
             documents = await QualificationCateg.find().populate(
                 {
-                    path:'qualification',
-                    select:'_id title subtitle start_year end_year isActive'
+                    path: 'qualification',
+                    select: '_id title subtitle start_year end_year isActive'
                 }
             ).select('-updatedAt -__v').sort(
                 {

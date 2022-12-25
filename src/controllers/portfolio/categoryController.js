@@ -46,7 +46,7 @@ const portfolioCategController = {
     },
 
     //Update in work by ID
-    async edit_work(req, res, next) {
+    async add_work(req, res, next) {
 
         const { workId } = req.body
         let document
@@ -57,6 +57,30 @@ const portfolioCategController = {
                 },
                 {
                     $push:{
+                        works:workId
+                    }
+                },
+                { new: true }
+            )
+            console.log(document)
+        } catch (error) {
+            return next(error)
+        }
+        res.status(201).json(document)
+    },
+    
+    //remove in work by ID
+    async remove_work(req, res, next) {
+
+        const { workId } = req.body
+        let document
+        try {
+            document = await PortfolioCateg.findOneAndUpdate(
+                {
+                    _id: req.params.id
+                },
+                {
+                    $pull:{
                         works:workId
                     }
                 },

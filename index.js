@@ -10,6 +10,7 @@ import swaggerDocument from './swagger.json'
 
 import routes from './src/routes'
 import { swaggerCustomUI } from './public/css/customCss'
+import cors from 'cors'
 
 // const upload = multer()
 const app = express()
@@ -30,6 +31,18 @@ db.once('open', () => {
 
 // Static Files
 app.use(express.static('public'));
+
+// app.use(cors({
+//     origin: 'http://localhost:5100', // use your actual domain name (or localhost), using * is not recommended
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+//     allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
+//     credentials: true
+// }))
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
 
 // Example for other olders
 app.use('/css', express.static(__dirname + 'public/css'))
@@ -63,4 +76,5 @@ app.use(routes)
 app.use(errorHandler)
 
 //Port Listen
-app.listen(APP_PORT, () => console.log(`Listinig on port ${APP_PORT}`))
+const port = APP_PORT || 6000;
+app.listen(port, () => console.log(`Listinig on port ${APP_PORT}`))

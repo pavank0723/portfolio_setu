@@ -8,7 +8,8 @@ route.post('/store',[auth, admin], portfolioCategController.store)
 route.get('/views', portfolioCategController.show)
 route.get('/view/:id', portfolioCategController.index)
 route.put('/edit/:id',[auth, admin], portfolioCategController.edit)
-route.put('/edit_work/:id', portfolioCategController.edit_work)
+route.post('/add_work/:id',[auth,admin], portfolioCategController.add_work)
+route.delete('/remove_work/:id',[auth, admin], portfolioCategController.remove_work)
 route.delete('/destroy/:id',[auth, admin], portfolioCategController.destroy)
 
 export default route

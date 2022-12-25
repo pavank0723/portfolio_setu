@@ -1,4 +1,4 @@
-import { Experience } from "../../models"
+import { Experience, QualificationCateg } from "../../models"
 
 const experienceController = {
     //Create 
@@ -83,11 +83,13 @@ const experienceController = {
 
     //Delete
     async destroy(req, res, next) {
-        const document = await Experience.findOneAndRemove(
+        let document
+        document = await Experience.findOneAndRemove(
             {
                 _id: req.params.id
             }
         )
+        
         if (!document) {
             return next(new Error('Nothing to delete'))
         }

@@ -198,9 +198,10 @@ const aboutController = {
 
         })
     },
+    
 
     //Update in social media link by ID
-    async edit_social_link(req, res, next) {
+    async add_social_link(req, res, next) {
 
         const { socialId } = req.body
         let document
@@ -223,8 +224,33 @@ const aboutController = {
         res.status(201).json(document)
     },
 
+    //Remove Social Link
+    async remove_social_link(req, res, next) {
+        const { socialId } = req.body
+
+        let document
+        try {
+            document = await About.findOneAndUpdate(
+                {
+                    _id: req.params.id
+                },
+                {
+                    $pull: {
+                        social_link: socialId
+                    }
+                },
+                { new: true }
+
+            )
+
+        } catch (error) {
+            return next(error)
+        }
+        res.status(201).json(document)
+    },
+
     //Update in about info category by ID
-    async edit_info_category(req, res, next) {
+    async add_info_category(req, res, next) {
 
         const { infoCategId } = req.body
         let document
@@ -241,6 +267,31 @@ const aboutController = {
                 { new: true }
             )
             console.log(document)
+        } catch (error) {
+            return next(error)
+        }
+        res.status(201).json(document)
+    },
+
+    //Remove Social Link
+    async remove_info_category(req, res, next) {
+        const { infoCategId } = req.body
+
+        let document
+        try {
+            document = await About.findOneAndUpdate(
+                {
+                    _id: req.params.id
+                },
+                {
+                    $pull: {
+                        info_category: infoCategId
+                    }
+                },
+                { new: true }
+
+            )
+
         } catch (error) {
             return next(error)
         }

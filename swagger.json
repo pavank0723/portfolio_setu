@@ -516,7 +516,60 @@
                 ]
             }
         },
-        "/portfolio_category/edit_work/{id}": {
+        "/portfolio_category/destroy/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Portfolio"
+                ],
+                "summary": "Delete the particular portfolio category by ID",
+                "responses": {
+                    "201": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/portfolio_category/add_work/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -526,11 +579,11 @@
                     "type": "string"
                 }
             ],
-            "put": {
+            "post": {
                 "tags": [
                     "Portfolio"
                 ],
-                "summary": "Update details of portfolio category",
+                "summary": "Add details of portfolio in category",
                 "consumes": ["application/x-www-form-urlencoded"],
                 "parameters": [
                     {
@@ -578,12 +631,13 @@
                 ]
             }
         },
-        "/portfolio_category/destroy/{id}": {
+        "/portfolio_category/remove_work/{id}": {
             "parameters": [
                 {
                     "name": "id",
                     "in": "path",
                     "required": true,
+                    "description": "ID of portfolio category that we want to find",
                     "type": "string"
                 }
             ],
@@ -591,10 +645,18 @@
                 "tags": [
                     "Portfolio"
                 ],
-                "summary": "Delete the particular portfolio category by ID",
+                "summary": "Delete details of portfolio in category",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "workId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
-                        "description": "Successfully deleted",
+                        "description": "Successfully modified",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -1566,32 +1628,23 @@
                 ]
             }
         },
-        "/skill_category/add_skill/{id}": {
+        "/skill_category/destroy/{id}": {
             "parameters": [
                 {
                     "name": "id",
                     "in": "path",
                     "required": true,
-                    "description": "ID of skill category that we want to find",
                     "type": "string"
                 }
             ],
-            "post": {
+            "delete": {
                 "tags": [
                     "Skills"
                 ],
-                "summary": "Update details of skill category",
-                "consumes": ["application/x-www-form-urlencoded"],
-                "parameters": [
-                    {
-                        "name": "skillId",
-                        "in": "formData",
-                        "required": true
-                    }
-                ],
+                "summary": "Delete the particular skill category by ID",
                 "responses": {
                     "201": {
-                        "description": "Successfully modified",
+                        "description": "Successfully deleted",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -1628,23 +1681,32 @@
                 ]
             }
         },
-        "/skill_category/destroy/{id}": {
+        "/skill_category/add_skill/{id}": {
             "parameters": [
                 {
                     "name": "id",
                     "in": "path",
                     "required": true,
+                    "description": "ID of skill category that we want to find",
                     "type": "string"
                 }
             ],
-            "delete": {
+            "post": {
                 "tags": [
                     "Skills"
                 ],
-                "summary": "Delete the particular skill category by ID",
+                "summary": "Update details of skill category",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "skillId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
-                        "description": "Successfully deleted",
+                        "description": "Successfully modified",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -2157,7 +2219,60 @@
                 ]
             }
         },
-        "/about/edit_social_link/{id}": {
+        "/about/destroy/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "Delete the particular about by ID",
+                "responses": {
+                    "201": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/about/add_social_link/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -2167,7 +2282,69 @@
                     "type": "string"
                 }
             ],
-            "put": {
+            "post": {
+                "tags": [
+                    "About"
+                ],
+                "summary": "Update details of social link in about",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "socialId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successfully added",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
+        "/about/remove_social_link/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of about that we want to find",
+                    "type": "string"
+                }
+            ],
+            "delete": {
                 "tags": [
                     "About"
                 ],
@@ -2219,7 +2396,7 @@
                 ]
             }
         },        
-        "/about/edit_info_category/{id}": {
+        "/about/add_info_category/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -2229,7 +2406,7 @@
                     "type": "string"
                 }
             ],
-            "put": {
+            "post": {
                 "tags": [
                     "About"
                 ],
@@ -2280,13 +2457,14 @@
                     }
                 ]
             }
-        },
-        "/about/destroy/{id}": {
+        },        
+        "/about/remove_info_category/{id}": {
             "parameters": [
                 {
                     "name": "id",
                     "in": "path",
                     "required": true,
+                    "description": "ID of about that we want to find",
                     "type": "string"
                 }
             ],
@@ -2294,10 +2472,18 @@
                 "tags": [
                     "About"
                 ],
-                "summary": "Delete the particular about by ID",
+                "summary": "Update details of info category in about",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "infoCategId",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "201": {
-                        "description": "Successfully deleted",
+                        "description": "Successfully added",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
@@ -3048,6 +3234,59 @@
                 ]
             }
         },
+        "/qualification_category/destroy/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "delete": {
+                "tags": [
+                    "Qualification"
+                ],
+                "summary": "Delete the particular qualification category by ID",
+                "responses": {
+                    "201": {
+                        "description": "Successfully deleted",
+                        "schema": {
+                            "$ref": "#/definitions/SampleModel"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorModel"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "Authorization": []
+                    }
+                ]
+            }
+        },
         "/qualification_category/add_experience/{id}": {
             "parameters": [
                 {
@@ -3109,7 +3348,7 @@
                 ]
             }
         },
-        "/qualification_category/destroy/{id}": {
+        "/qualification_category/remove_experience/{id}": {
             "parameters": [
                 {
                     "name": "id",
@@ -3122,10 +3361,18 @@
                 "tags": [
                     "Qualification"
                 ],
-                "summary": "Delete the particular qualification category by ID",
+                "summary": "Remove qualification in particular category",
+                "consumes": ["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "name": "experienceId",
+                        "in": "formData",
+                        "required": false
+                    }
+                ],
                 "responses": {
                     "201": {
-                        "description": "Successfully deleted",
+                        "description": "Successfully modified",
                         "schema": {
                             "$ref": "#/definitions/SampleModel"
                         }
