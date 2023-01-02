@@ -4,7 +4,7 @@ import { admin, auth } from "../../middlewares";
 
 var route = express.Router();
 
-route.post('/store',[auth, admin], portfolioCategController.store)
+route.post('/store', portfolioCategController.store)
 route.get('/views', portfolioCategController.show)
 route.get('/view/:id', portfolioCategController.index)
 route.put('/edit/:id',[auth, admin], portfolioCategController.edit)

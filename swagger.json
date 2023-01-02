@@ -711,6 +711,21 @@
                         "in": "formData"
                     },
                     {
+                        "name": "start_date",
+                        "in": "formData",
+                        "type": "string", 
+                        "format": "date",
+                        "default":"2022-06-30"
+                    },
+                    {
+                        "name": "end_date",
+                        "in": "formData",
+                        "type": "string", 
+                        "format": "date",
+                        "default":"2022-06-30"
+                        
+                    },
+                    {
                         "name": "image",
                         "in": "formData",
                         "type": "file",

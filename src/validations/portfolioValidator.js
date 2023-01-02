@@ -13,5 +13,7 @@ export const portfolioSchema = Joi.object(
         title :Joi.string().required(),
         demo:Joi.string(),
         image:Joi.string(),
+        start_date:Joi.string(),
+        end_date:Joi.string()
     }
 )

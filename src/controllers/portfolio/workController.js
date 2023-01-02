@@ -55,7 +55,7 @@ const workController = {
                 )
                 return next(error)
             }
-            const { title, demo } = req.body
+            const { title, demo,start_date,end_date } = req.body
             let document
 
             try {
@@ -63,6 +63,8 @@ const workController = {
                     {
                         title,
                         demo,
+                        start_date,
+                        end_date,
                         image: filePath
                     }
                 )
@@ -80,6 +82,7 @@ const workController = {
         }
         )
     },
+    
     //Read all work
     async show(req, res, next) {
         let documents
@@ -156,7 +159,7 @@ const workController = {
                 }
                 else {
                     //Update part
-                    const { title, demo } = req.body
+                    const { title, demo,start_date,end_date } = req.body
                     let document
 
                     try {
@@ -167,6 +170,8 @@ const workController = {
                             {
                                 title,
                                 demo,
+                                start_date,
+                                end_date,
                                 ...(req.file && { image: filePath })
                             },
                             {

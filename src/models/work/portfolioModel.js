@@ -14,6 +14,14 @@ const portfolioSchema = new Schema(
             type:String,
             required:false
         },
+        start_date:{
+            type:String,
+            required:false
+        },
+        end_date:{
+            type:String,
+            required:false
+        },
         image:{
             type:String,
             required:true,
