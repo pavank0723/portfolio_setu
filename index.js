@@ -77,4 +77,4 @@ app.use(errorHandler)
 
 //Port Listen
 const port = APP_PORT || 6000;
-app.listen(port, () => console.log(`Listinig on port ${APP_PORT}`))
+app.listen(port, () => console.log(`Listining on port ${APP_PORT}`))
